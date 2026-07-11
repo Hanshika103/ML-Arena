@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 # ML Arena
 
 An Intelligent Machine Learning Benchmark Platform built using Streamlit and Scikit-learn.
