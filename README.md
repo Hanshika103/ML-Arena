@@ -1,177 +1,196 @@
-# 🚀 IntelliML Studio
+# 🚀 ML Arena
 
-> **From Raw Data to Intelligent Decisions**
+## Intelligent Machine Learning Benchmark Platform
 
-An intelligent Machine Learning Automation Platform that simplifies the complete Machine Learning workflow by automatically analyzing datasets, preprocessing data, training multiple machine learning models, evaluating their performance, selecting the best model, and generating predictions with minimal user effort.
-
----
-
-# 📌 Project Information
-
-**Project Name:** IntelliML Studio
-
-**Project Type:** Summer Internship Project
-
-**Domain:** Machine Learning | Data Science | Python
-
-**Language:** Python 3.11.9
-
-**Development Environment:** Visual Studio Code
+ML Arena is an end-to-end Machine Learning benchmarking platform built with **Python** and **Streamlit**. It enables users to upload datasets, perform exploratory data analysis, preprocess data, train multiple machine learning models, compare their performance, and export results through a simple and interactive web interface.
 
 ---
 
-# 🎯 Problem Statement
+# ✨ Features
 
-Building Machine Learning models requires several manual steps such as:
-
-- Data Cleaning
-- Handling Missing Values
-- Encoding Categorical Features
-- Feature Scaling
-- Training Multiple Models
-- Comparing Performance
-- Selecting the Best Algorithm
-
-These tasks require technical knowledge and consume significant time.
-
----
-
-# 💡 Proposed Solution
-
-IntelliML Studio automates the complete Machine Learning pipeline by providing:
-
-- Dataset Analysis
-- Automatic Data Cleaning
-- Data Visualization
-- Feature Preprocessing
-- Multiple Model Training
-- Performance Comparison
-- Best Model Recommendation
-- Prediction System
-- PDF Report Generation
-- Trained Model Export
+- 📂 Upload CSV and Excel datasets
+- 📊 Interactive dataset analysis
+- 📈 Statistical summary and visualization
+- 🧹 Data preprocessing tools
+- 🔤 Label encoding
+- 📏 Feature scaling
+- 🗑 Duplicate removal
+- 💾 Download processed dataset
+- 🤖 Multiple ML model training *(Upcoming)*
+- 🏆 Model comparison dashboard *(Upcoming)*
+- 📄 Export reports and trained models *(Upcoming)*
 
 ---
 
-# 🎯 Project Objectives
+# 📂 Application Modules
 
-- Automate data preprocessing
-- Reduce manual effort
-- Train multiple ML algorithms
-- Compare model performance
-- Recommend the best model
-- Generate predictions
-- Export trained models
-- Generate analysis reports
+## 🏠 Dashboard
+
+- Welcome screen
+- Project overview
+- Modern responsive UI
+- Sidebar navigation
 
 ---
 
-# 🛠️ Tech Stack
+## 📂 Upload Dataset
 
-| Technology | Purpose |
-|------------|---------|
-| Python | Programming Language |
-| Streamlit | Web Interface |
-| Pandas | Data Processing |
-| NumPy | Numerical Computing |
-| Scikit-learn | Machine Learning |
-| Plotly | Interactive Visualization |
-| Matplotlib | Data Visualization |
-| Joblib | Model Saving |
-| ReportLab | PDF Generation |
+Users can upload CSV or Excel datasets.
+
+### Features
+
+- CSV Support
+- Excel Support
+- Dataset Preview
+- Dataset Information
+- Target Column Selection
+- Session State Storage
 
 ---
 
-# 📁 Project Structure
+## 📊 Dataset Analysis
+
+Provides an overview of the uploaded dataset.
+
+### Includes
+
+- Dataset Shape
+- Missing Values
+- Duplicate Records
+- Data Types
+- Statistical Summary
+- Correlation Heatmap
+- Distribution Plot
+- Target Variable Distribution
+
+---
+
+## 🧹 Data Preprocessing
+
+Performs essential preprocessing tasks.
+
+### Supported Operations
+
+- Mean Imputation
+- Median Imputation
+- Mode Imputation
+- Drop Missing Rows
+- Label Encoding
+- Standard Scaling
+- Min-Max Scaling
+- Duplicate Removal
+- Download Processed Dataset
+
+---
+
+## 🤖 Model Training *(Under Development)*
+
+Planned algorithms include:
+
+- Logistic Regression
+- Decision Tree
+- Random Forest
+- KNN
+- SVM
+- Naive Bayes
+- Linear Regression
+- Random Forest Regressor
+
+---
+
+## 📊 Results Dashboard *(Under Development)*
+
+- Accuracy Comparison
+- Leaderboard
+- Confusion Matrix
+- ROC Curve
+- Feature Importance
+- Interactive Charts
+
+---
+
+## 📄 Export Module *(Under Development)*
+
+- Download Trained Model
+- Export Prediction Results
+- Performance Report
+
+---
+
+# 🛠 Technology Stack
+
+- Python
+- Streamlit
+- Pandas
+- NumPy
+- Matplotlib
+- Plotly
+- Scikit-Learn
+- Joblib
+- OpenPyXL
+
+---
+
+# 📁 Folder Structure
 
 ```text
-IntelliML-Studio/
-│
-├── assets/
-├── config/
-├── datasets/
-│   ├── raw/
-│   ├── processed/
-│   └── sample/
-│
-├── outputs/
-│   ├── charts/
-│   ├── predictions/
-│   ├── reports/
-│   └── logs/
-│
-├── saved_models/
-│
-├── src/
-│   ├── preprocessing/
-│   ├── visualization/
-│   ├── training/
-│   ├── evaluation/
-│   ├── prediction/
-│   ├── components/
-│   └── utils/
-│
-├── tests/
-├── docs/
-│
+ML-Arena/
 ├── app.py
-├── README.md
+├── config/
+├── ui/
+├── pages/
 ├── requirements.txt
-└── .gitignore
+└── README.md
 ```
 
 ---
 
-# 📌 Development Status
+# 🚀 Installation
 
-Current Version: **v0.1**
+```bash
+git clone <repository-url>
+cd ML-Arena
+python -m venv .venv
+```
 
-### Completed
+Activate virtual environment:
 
-- Project Planning
-- Environment Setup
-- Virtual Environment Creation
-- Folder Structure Design
-- Project Documentation Initialization
+**Windows**
 
-### In Progress
+```bash
+.venv\Scripts\activate
+```
 
-- UI Design
+Install dependencies:
 
-### Upcoming
+```bash
+pip install -r requirements.txt
+```
 
-- Dataset Upload Module
-- Dataset Analysis
-- Data Cleaning
-- Visualization
-- Model Training
-- Model Evaluation
-- Prediction Module
-- Report Generation
+Run the application:
+
+```bash
+streamlit run app.py
+```
 
 ---
 
-# 🚀 Future Features
+# 🔮 Future Enhancements
 
-- Dataset Health Score
-- Feature Importance
-- Explainable AI
-- Interactive Dashboard
+- AutoML Support
 - Hyperparameter Tuning
-- Automatic Report Generation
+- Cross Validation
+- SHAP Explainability
+- User Authentication
+- Cloud Deployment
+- Model Versioning
 
 ---
 
-# 👩‍💻 Developer
+# 👩‍💻 Author
 
 **Hanshika Mukati**
 
-B.Tech Computer Science Engineering
+B.Tech – Computer Science and Engineering
 
-Summer Internship Project
-
----
-
-# 📄 License
-
-This project is developed for academic learning and internship purposes.
+Mody University of Science and Technology
