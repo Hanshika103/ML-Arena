@@ -1,0 +1,117 @@
+.hero{
+
+background:linear-gradient(
+135deg,
+#FFF8E1,
+#F3E5AB
+);
+
+color:#1F2937;
+
+border:1px solid #E5E7EB;
+
+box-shadow:0 10px 25px rgba(0,0,0,.08);
+
+}
+.card{
+
+background:white;
+
+border:1px solid #E5E7EB;
+
+border-radius:18px;
+
+box-shadow:0 8px 20px rgba(0,0,0,.05);
+
+}
+.stButton>button{
+
+background:#D4A017;
+
+color:white;
+
+font-weight:600;
+
+}
+section[data-testid="stSidebar"]{
+
+    background:#FFFFFF;
+    border-right:1px solid #E5E7EB;
+}
+
+/* Sidebar text */
+section[data-testid="stSidebar"] *{
+
+    color:#1F2937 !important;
+}
+
+/* Sidebar buttons */
+section[data-testid="stSidebar"] .stButton>button{
+
+    background:#D4A017;
+    color:white !important;
+}
+
+/* Navigation links */
+section[data-testid="stSidebar"] a{
+
+    color:#1F2937 !important;
+}
+.stApp{
+
+background:#F8FAFC;
+
+}
+.section-title{
+
+color:#1F2937;
+
+}
+.metric-card{
+
+background:white;
+
+border-left:6px solid #D4A017;
+
+}
+/* ===========================
+   Full Width Layout
+=========================== */
+
+.block-container {
+    max-width: 95% !important;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
+}
+
+/* Dataframe */
+
+[data-testid="stDataFrame"]{
+    border-radius:14px;
+    overflow:hidden;
+}
+
+/* Metric Cards */
+
+[data-testid="metric-container"]{
+    background:#FFFFFF;
+    border:1px solid #E5E7EB;
+    border-radius:14px;
+    padding:18px;
+    box-shadow:0 5px 15px rgba(0,0,0,.08);
+}
+
+/* Upload Box */
+
+[data-testid="stFileUploader"]{
+    border:2px dashed #D4A017;
+    border-radius:16px;
+    padding:15px;
+}
+
+/* Select Box */
+
+.stSelectbox{
+    margin-top:10px;
+}
