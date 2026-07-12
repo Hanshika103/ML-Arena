@@ -1,168 +1,206 @@
+# 🧠 ML Arena – Intelligent Machine Learning Benchmark Platform
 
-# 🚀 ML Arena
-
-## Intelligent Machine Learning Benchmark Platform
-
-ML Arena is an end-to-end Machine Learning benchmarking platform built with **Python** and **Streamlit**. It enables users to upload datasets, perform exploratory data analysis, preprocess data, train multiple machine learning models, compare their performance, and export results through a simple and interactive web interface.
-
----
-
-# ✨ Features
-
-- 📂 Upload CSV and Excel datasets
-- 📊 Interactive dataset analysis
-- 📈 Statistical summary and visualization
-- 🧹 Data preprocessing tools
-- 🔤 Label encoding
-- 📏 Feature scaling
-- 🗑 Duplicate removal
-- 💾 Download processed dataset
-- 🤖 Multiple ML model training *(Upcoming)*
-- 🏆 Model comparison dashboard *(Upcoming)*
-- 📄 Export reports and trained models *(Upcoming)*
+![Python](https://img.shields.io/badge/Python-3.x-blue)
+![Streamlit](https://img.shields.io/badge/Framework-Streamlit-red)
+![Machine Learning](https://img.shields.io/badge/Domain-Machine%20Learning-green)
+![Status](https://img.shields.io/badge/Development-Active-orange)
 
 ---
 
-# 📂 Application Modules
+# 🚀 Overview
 
-## 🏠 Dashboard
+**ML Arena** is an interactive machine learning platform that simplifies the process of building and evaluating machine learning models through an easy-to-use Streamlit interface.
 
-- Welcome screen
-- Project overview
-- Modern responsive UI
-- Sidebar navigation
+The platform provides a structured workflow where users can upload datasets, understand data characteristics, preprocess data, train machine learning models, and analyze model performance using evaluation metrics.
 
----
-
-## 📂 Upload Dataset
-
-Users can upload CSV or Excel datasets.
-
-### Features
-
-- CSV Support
-- Excel Support
-- Dataset Preview
-- Dataset Information
-- Target Column Selection
-- Session State Storage
+The main goal of ML Arena is to create a simple yet effective environment for experimenting with different machine learning algorithms without manually writing repetitive ML pipeline code.
 
 ---
 
-## 📊 Dataset Analysis
+# ✨ Implemented Features
 
-Provides an overview of the uploaded dataset.
+## 📂 Dataset Upload Module
 
-### Includes
-
-- Dataset Shape
-- Missing Values
-- Duplicate Records
-- Data Types
-- Statistical Summary
-- Correlation Heatmap
-- Distribution Plot
-- Target Variable Distribution
+* Upload datasets in CSV format
+* Store uploaded data for further processing
+* Display dataset preview
+* Validate dataset availability before processing
 
 ---
 
-## 🧹 Data Preprocessing
+## 📊 Dataset Analysis Module
 
-Performs essential preprocessing tasks.
+Provides automatic dataset insights:
 
-### Supported Operations
-
-- Mean Imputation
-- Median Imputation
-- Mode Imputation
-- Drop Missing Rows
-- Label Encoding
-- Standard Scaling
-- Min-Max Scaling
-- Duplicate Removal
-- Download Processed Dataset
+* Dataset shape information
+* Column details
+* Data type analysis
+* Missing value detection
+* Statistical summary
 
 ---
 
-## 🤖 Model Training *(Under Development)*
+## ⚙️ Data Preprocessing Module
 
-Planned algorithms include:
+Implemented preprocessing workflow:
 
-- Logistic Regression
-- Decision Tree
-- Random Forest
-- KNN
-- SVM
-- Naive Bayes
-- Linear Regression
-- Random Forest Regressor
+* Feature and target selection
+* Data preparation before model training
+* Dataset transformation pipeline
 
 ---
 
-## 📊 Results Dashboard *(Under Development)*
+# 🧠 Machine Learning Model Training
 
-- Accuracy Comparison
-- Leaderboard
-- Confusion Matrix
-- ROC Curve
-- Feature Importance
-- Interactive Charts
+ML Arena currently supports supervised learning workflows.
 
----
+## Regression
 
-## 📄 Export Module *(Under Development)*
+Implemented regression model training:
 
-- Download Trained Model
-- Export Prediction Results
-- Performance Report
+* Linear Regression
+* Decision Tree Regressor
+* Random Forest Regressor
 
----
+## Classification
 
-# 🛠 Technology Stack
+Implemented classification model training:
 
-- Python
-- Streamlit
-- Pandas
-- NumPy
-- Matplotlib
-- Plotly
-- Scikit-Learn
-- Joblib
-- OpenPyXL
+* Logistic Regression
+* Decision Tree Classifier
+* Random Forest Classifier
 
 ---
 
-# 📁 Folder Structure
+# 📈 Model Evaluation
 
-```text
+## Regression Evaluation
+
+The platform calculates:
+
+* Mean Absolute Error (MAE)
+* Mean Squared Error (MSE)
+* Root Mean Squared Error (RMSE)
+* R² Score
+
+## Classification Evaluation
+
+The platform generates:
+
+* Accuracy Score
+* Precision
+* Recall
+* F1 Score
+* Classification Report
+
+---
+
+# 🖥️ Results Dashboard
+
+Implemented results visualization page that displays:
+
+* Selected model information
+* Prediction results
+* Evaluation metrics
+* Classification performance report
+
+---
+
+# 🏗️ Application Workflow
+
+```
+Dataset Upload
+        |
+        ↓
+Dataset Analysis
+        |
+        ↓
+Data Preprocessing
+        |
+        ↓
+Model Training
+        |
+        ↓
+Model Evaluation
+        |
+        ↓
+Results Display
+```
+
+---
+
+# 🛠️ Technology Stack
+
+## Programming Language
+
+* Python
+
+## Framework
+
+* Streamlit
+
+## Data Processing
+
+* Pandas
+* NumPy
+
+## Machine Learning
+
+* Scikit-learn
+
+## Visualization
+
+* Matplotlib
+* Plotly
+* Seaborn
+
+## Model Saving / Loading
+
+* Joblib
+
+---
+
+# 📁 Project Structure
+
+```
 ML-Arena/
+
+│
 ├── app.py
-├── config/
-├── ui/
+│
 ├── pages/
+│   ├── Dashboard.py
+│   ├── Upload_Dataset.py
+│   ├── Dataset_Analysis.py
+│   ├── Preprocessing.py
+│   ├── Model_Training.py
+│   └── Results.py
+│
+├── utils/
+│   ├── preprocessing.py
+│   ├── model_utils.py
+│   └── theme.py
+│
+├── assets/
+│   └── css/
+│       └── style.css
+│
 ├── requirements.txt
+│
 └── README.md
 ```
 
 ---
 
-# 🚀 Installation
+# ⚙️ Installation & Setup
+
+Clone the repository:
 
 ```bash
 git clone <repository-url>
-cd ML-Arena
-python -m venv .venv
 ```
 
-Activate virtual environment:
-
-**Windows**
-
-```bash
-.venv\Scripts\activate
-```
-
-Install dependencies:
+Install required libraries:
 
 ```bash
 pip install -r requirements.txt
@@ -176,23 +214,44 @@ streamlit run app.py
 
 ---
 
-# 🔮 Future Enhancements
+# 📌 Current Project Status
 
-- AutoML Support
-- Hyperparameter Tuning
-- Cross Validation
-- SHAP Explainability
-- User Authentication
-- Cloud Deployment
-- Model Versioning
+Implemented Modules:
+
+✅ Streamlit Application Setup
+✅ Multi-page Architecture
+✅ Dataset Upload
+✅ Dataset Analysis
+✅ Data Preprocessing Workflow
+✅ Regression Model Training
+✅ Classification Model Training
+✅ Model Performance Evaluation
+✅ Results Dashboard
+✅ Custom UI Styling
 
 ---
 
-# 👩‍💻 Author
+# 🔮 Future Improvements
+
+Future versions may include additional machine learning automation and advanced analysis capabilities.
+
+---
+
+# 👩‍💻 Developer
 
 **Hanshika Mukati**
 
-B.Tech – Computer Science and Engineering
+B.Tech Computer Science Engineering
 
-Mody University of Science and Technology
->>>>>>> a6fa566082b353373d7757a530f351cf7836be4f
+Machine Learning | Python | Artificial Intelligence
+
+---
+
+## 📍 Project Status
+
+🚧 Active Development
+
+Current Version: **v0.3**
+
+```
+```
