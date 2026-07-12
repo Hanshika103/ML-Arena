@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
+from ui.theme import load_theme
+
+load_theme()
 
 # ----------------------------
 # Session State Initialization

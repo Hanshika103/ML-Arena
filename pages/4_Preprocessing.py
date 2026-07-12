@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
 from sklearn.preprocessing import LabelEncoder, StandardScaler, MinMaxScaler
+from ui.theme import load_theme
+
+load_theme()
 
 # ----------------------------
 # Session State Initialization
@@ -34,6 +37,28 @@ st.divider()
 # ============================
 
 st.subheader("❌ Missing Value Handling")
+# Show Missing Value Statistics
+
+missing_values = df.isnull().sum()
+missing_values = missing_values[missing_values > 0]
+
+if len(missing_values) > 0:
+
+    st.info("Columns containing missing values")
+
+    stats = pd.DataFrame({
+        "Column": missing_values.index,
+        "Missing Values": missing_values.values
+    })
+
+    st.dataframe(
+        stats,
+        use_container_width=True,
+        hide_index=True
+    )
+
+else:
+    st.success("✅ No Missing Values Found")
 
 missing_option = st.radio(
     "Choose Method",

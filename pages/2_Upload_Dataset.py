@@ -1,5 +1,8 @@
 import streamlit as st
 import pandas as pd
+from ui.theme import load_theme
+
+load_theme()
 
 # ----------------------------
 # Session State Initialization
