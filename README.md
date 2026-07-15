@@ -193,33 +193,39 @@ ML_Arena/
 
 # ⚡ Workflow
 
-```
-Upload Dataset
-        │
-        ▼
+Dataset Upload
+
+⬇
+
 Dataset Analysis
-        │
-        ▼
+
+⬇
+
 Data Preprocessing
-        │
-        ▼
+
+⬇
+
 Train-Test Split
-        │
-        ▼
+
+⬇
+
 Model Selection
-        │
-        ▼
+
+⬇
+
 Model Training
-        │
-        ▼
+
+⬇
+
 Performance Evaluation
-        │
-        ▼
-Result Visualization
-        │
-        ▼
-Export Model
-```
+
+⬇
+
+Model Comparison
+
+⬇
+
+Export Model & Reports
 
 ---
 
@@ -277,34 +283,32 @@ The following screenshots will be added:
 
 - Hyperparameter Tuning
 - Cross Validation
-- Model Comparison Dashboard
 - Feature Importance
 - ROC Curve
 - Precision-Recall Curve
 - Learning Curve
 - SHAP Explainability
-- Model History
-- Experiment Tracking
+- AutoML Integration
+- Experiment History
 - PDF Report Generation
 - Dark / Light Theme
-- AutoML Support
-
----
+- Cloud Deployment
 
 # 🎓 Learning Outcomes
 
 This project demonstrates practical implementation of:
 
-- Machine Learning Workflow
-- Data Cleaning
+- End-to-End Machine Learning Pipeline
 - Data Visualization
-- Model Evaluation
-- Streamlit Development
-- UI/UX Design
+- Data Preprocessing
+- Model Benchmarking
+- Model Comparison
+- Model Serialization
+- Machine Learning Evaluation
+- Streamlit Application Development
+- Software Architecture
 - Session State Management
-- Modular Python Programming
-- Software Project Organization
-
+- Professional UI Design
 ---
 
 # 🤝 Contributing
