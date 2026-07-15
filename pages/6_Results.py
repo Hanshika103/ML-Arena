@@ -100,6 +100,13 @@ if task == "Classification":
         average="weighted",
         zero_division=0,
     )
+    # Save Metrics
+    st.session_state["metrics"] = {
+        "Accuracy": round(accuracy, 4),
+        "Precision": round(precision, 4),
+        "Recall": round(recall, 4),
+        "F1 Score": round(f1, 4),
+    }
 
     c1, c2 = st.columns(2)
 
@@ -117,6 +124,13 @@ else:
     mse = mean_squared_error(y_test, predictions)
     rmse = mse ** 0.5
     r2 = r2_score(y_test, predictions)
+    # Save Metrics
+    st.session_state["metrics"] = {
+    "MAE": round(mae, 4),
+    "MSE": round(mse, 4),
+    "RMSE": round(rmse, 4),
+    "R2 Score": round(r2, 4),
+    }
 
     c1, c2 = st.columns(2)
 
