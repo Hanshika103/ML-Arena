@@ -11,6 +11,9 @@ from sklearn.metrics import (
     mean_absolute_error,
     mean_squared_error,
     r2_score,
+    roc_curve,
+    auc,
+    precision_recall_curve,
 )
 
 from ui.theme import load_theme
@@ -244,6 +247,129 @@ if task == "Classification":
         use_container_width=True,
     )
 
+     # ----------------------------
+# ROC Curve
+# ----------------------------
+
+model = st.session_state["trained_model"]
+X_test = st.session_state["X_test"]
+
+if (
+    task == "Classification"
+    and len(np.unique(y_test)) == 2
+    and hasattr(model, "predict_proba")
+):
+
+    st.divider()
+    st.subheader("📈 ROC Curve")
+
+    y_prob = model.predict_proba(X_test)[:, 1]
+
+    fpr, tpr, _ = roc_curve(y_test, y_prob)
+
+    roc_auc = auc(fpr, tpr)
+
+    fig, ax = plt.subplots(figsize=(6, 5))
+
+    ax.plot(
+        fpr,
+        tpr,
+        label=f"AUC = {roc_auc:.3f}",
+    )
+
+    ax.plot(
+        [0, 1],
+        [0, 1],
+        linestyle="--",
+    )
+
+    ax.set_xlabel("False Positive Rate")
+    ax.set_ylabel("True Positive Rate")
+    ax.set_title("ROC Curve")
+    ax.legend()
+
+    st.pyplot(fig)
+
+    # ----------------------------
+# Precision-Recall Curve
+# ----------------------------
+
+if (
+    task == "Classification"
+    and len(np.unique(y_test)) == 2
+    and hasattr(model, "predict_proba")
+):
+
+    st.divider()
+    st.subheader("📊 Precision-Recall Curve")
+
+    precision, recall, _ = precision_recall_curve(
+        y_test,
+        y_prob,
+    )
+
+    fig, ax = plt.subplots(figsize=(6, 5))
+
+    ax.plot(
+        recall,
+        precision,
+    )
+
+    ax.set_xlabel("Recall")
+    ax.set_ylabel("Precision")
+    ax.set_title("Precision-Recall Curve")
+
+    st.pyplot(fig)
+
+    # ----------------------------
+# Feature Importance
+# ----------------------------
+
+model = st.session_state["trained_model"]
+
+if hasattr(model, "feature_importances_"):
+
+    st.divider()
+    st.subheader("🌳 Feature Importance")
+
+    feature_names = st.session_state.get(
+        "feature_names",
+        [f"Feature {i+1}" for i in range(len(model.feature_importances_))]
+    )
+
+    importance_df = pd.DataFrame(
+        {
+            "Feature": feature_names,
+            "Importance": model.feature_importances_,
+        }
+    )
+
+    importance_df = importance_df.sort_values(
+        by="Importance",
+        ascending=False,
+    )
+
+    fig, ax = plt.subplots(figsize=(8, 5))
+
+    ax.barh(
+        importance_df["Feature"],
+        importance_df["Importance"],
+    )
+
+    ax.invert_yaxis()
+
+    ax.set_xlabel("Importance")
+    ax.set_title("Feature Importance")
+
+    st.pyplot(fig)
+
+    st.dataframe(
+        importance_df,
+        use_container_width=True,
+    )
+
+
+
 else: 
 # ----------------------------
 # Actual vs Predicted Plot
@@ -261,6 +387,7 @@ else:
         alpha=0.7,
     )
 
+
 # Perfect Prediction Line
     min_val = min(min(y_test), min(predictions))
     max_val = max(max(y_test), max(predictions))
@@ -277,6 +404,8 @@ else:
 
     st.pyplot(fig)
 
+   
+    
 # ----------------------------
 # Residual Plot
 # ----------------------------
@@ -305,6 +434,8 @@ else:
     ax.set_title("Residual Plot")
 
     st.pyplot(fig)
+
+    
 
     # ----------------------------
 # Model Comparison

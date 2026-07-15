@@ -31,7 +31,7 @@ def get_model(task, model_name):
             "Decision Tree": DecisionTreeClassifier(random_state=42),
             "Random Forest": RandomForestClassifier(random_state=42),
             "KNN": KNeighborsClassifier(),
-            "Support Vector Machine": SVC(),
+            "Support Vector Machine": SVC(probability=True, random_state=42),
         }
 
     else:
