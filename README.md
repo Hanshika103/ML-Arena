@@ -23,41 +23,41 @@ The goal of this project is to simplify the complete machine learning workflow w
 
 # ✨ Current Features
 
+# ✨ Current Features
+
 ## 📂 Dataset Management
 
 - Upload CSV datasets
-- Preview uploaded dataset
-- Dataset shape information
-- Column listing
-- Data type detection
-- Missing value inspection
-- Session-based dataset storage
+- Dataset Preview
+- Dataset Shape Information
+- Column Information
+- Data Type Detection
+- Missing Value Analysis
+- Session-Based Dataset Storage
 
 ---
 
-## 📊 Exploratory Data Analysis
+## 📊 Exploratory Data Analysis (EDA)
 
 - Dataset Overview
 - Statistical Summary
-- Missing Value Analysis
-- Duplicate Row Detection
+- Missing Value Visualization
+- Duplicate Record Detection
 - Correlation Heatmap
-- Numeric Feature Distribution
+- Feature Distribution Analysis
 - Target Variable Visualization
-- Feature Type Detection
+- Numerical & Categorical Feature Detection
 
 ---
 
 ## ⚙️ Data Preprocessing
 
-Supports complete preprocessing pipeline including:
-
 ### Missing Value Handling
 
 - Mean Imputation
 - Median Imputation
-- Most Frequent
-- Drop Missing Rows
+- Most Frequent Imputation
+- Drop Missing Values
 
 ### Encoding
 
@@ -66,39 +66,36 @@ Supports complete preprocessing pipeline including:
 
 ### Feature Scaling
 
-- StandardScaler
-- MinMaxScaler
-- RobustScaler
+- Standard Scaler
+- Min-Max Scaler
+- Robust Scaler
 
-### Train-Test Split
+### Data Splitting
 
-- Adjustable Test Size
-- Random State Selection
+- Adjustable Train-Test Split
+- Custom Random State
 
 ---
 
-## 🧠 Machine Learning Model Training
+## 🧠 Machine Learning
 
-### Classification Models
+### Classification
 
 - Logistic Regression
 - Decision Tree
 - Random Forest
 - K-Nearest Neighbors
 - Support Vector Machine
-- Naive Bayes
 
-### Regression Models
+### Regression
 
 - Linear Regression
 - Decision Tree Regressor
 - Random Forest Regressor
-- K-Nearest Neighbors Regressor
-- Support Vector Regressor
 
 ---
 
-## 📈 Performance Evaluation
+## 📈 Model Evaluation
 
 ### Classification Metrics
 
@@ -106,43 +103,48 @@ Supports complete preprocessing pipeline including:
 - Precision
 - Recall
 - F1 Score
-- Classification Report
 - Confusion Matrix
+- Classification Report
 
 ### Regression Metrics
 
-- Mean Absolute Error (MAE)
-- Mean Squared Error (MSE)
-- Root Mean Squared Error (RMSE)
+- MAE
+- MSE
+- RMSE
 - R² Score
 
 ---
 
-## 📊 Visualizations
+## 🏆 Model Comparison
 
-Current visual analytics include:
-
-- Correlation Heatmap
-- Target Distribution
-- Missing Value Chart
-- Feature Distributions
-- Confusion Matrix Visualization
-- Prediction Result Summary
+- Compare Multiple Models
+- Automatic Best Model Selection
+- Download Comparison Report
 
 ---
 
-## 🎨 Modern User Interface
+## 📦 Export Center
 
-- Professional Dashboard
+- Download Trained Model (.pkl)
+- Download Predictions (.csv)
+- Download Metrics (.csv)
+- Experiment Summary
+- Model Information Dashboard
+- Prediction Preview
+- Metrics Preview
+- Export Summary Dashboard
+
+---
+
+## 🎨 User Interface
+
+- Modern Dashboard
 - Responsive Layout
-- Custom CSS Styling
-- Gradient Components
-- Interactive Cards
-- Session State Management
-- Clean Navigation
-- User-Friendly Workflow
-
----
+- Professional Navigation
+- Custom CSS Theme
+- Interactive Metric Cards
+- Download Center
+- Clean Workflow
 
 # 🛠 Technology Stack
 
