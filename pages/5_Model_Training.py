@@ -9,6 +9,11 @@ from utils.model_training import (
     predict,
 )
 
+from utils.validators import validate_dataset
+
+if not validate_dataset():
+    st.stop()
+
 load_theme()
 
 # ----------------------------
@@ -144,10 +149,7 @@ st.divider()
 # Train Model
 # ----------------------------
 
-if st.button(
-    "🚀 Train Model",
-    use_container_width=True,
-):
+if st.button("🚀 Train Model"):
 
     X = df.drop(columns=[target])
     y = df[target]

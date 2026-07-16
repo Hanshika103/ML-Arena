@@ -1,6 +1,8 @@
 import streamlit as st
 from ui.theme import load_theme
 from config.settings import PAGE_CONFIG
+from utils.logger import get_logger
+from utils.session_manager import initialize_session_state
 
 # ----------------------------
 # Streamlit Page Configuration
@@ -13,22 +15,21 @@ st.set_page_config(**PAGE_CONFIG)
 load_theme()
 
 # ----------------------------
+# Initialize Session State
+# ----------------------------
+initialize_session_state()
+
+# ----------------------------
+# Initialize Logger
+# ----------------------------
+logger = get_logger()
+logger.info("ML Arena application started.")
+st.success("Logger executed from app.py")
+
+# ----------------------------
 # Session State Initialization
 # ----------------------------
-if "dataset" not in st.session_state:
-    st.session_state.dataset = None
 
-if "processed_data" not in st.session_state:
-    st.session_state.processed_data = None
-
-if "problem_type" not in st.session_state:
-    st.session_state.problem_type = None
-
-if "trained_models" not in st.session_state:
-    st.session_state.trained_models = {}
-
-if "best_model" not in st.session_state:
-    st.session_state.best_model = None
 
 # ----------------------------
 # Hero Section

@@ -44,7 +44,9 @@ def compare_models(
             "Logistic Regression": LogisticRegression(max_iter=1000),
             "Decision Tree": DecisionTreeClassifier(random_state=42),
             "Random Forest": RandomForestClassifier(random_state=42),
-            "KNN": KNeighborsClassifier(),
+            "KNN": KNeighborsClassifier(
+    n_neighbors=min(5, max(1, len(X_train) - 1))
+),
             "Support Vector Machine": SVC(),
         }
 

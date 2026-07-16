@@ -6,6 +6,11 @@ from datetime import datetime
 
 from ui.theme import load_theme
 
+from utils.validators import validate_predictions
+
+if not validate_predictions():
+    st.stop()
+
 # ----------------------------
 # Load Theme
 # ----------------------------
@@ -140,7 +145,7 @@ summary = pd.DataFrame({
 
 st.dataframe(
     summary,
-    use_container_width=True,
+    width="stretch",
     hide_index=True,
 )
 
@@ -165,7 +170,6 @@ st.download_button(
     data=model_buffer,
     file_name=f"{model_name.lower().replace(' ', '_')}_model.pkl",
     mime="application/octet-stream",
-    use_container_width=True,
 )
 
 # ----------------------------
@@ -184,7 +188,6 @@ st.download_button(
     data=prediction_csv,
     file_name="predictions.csv",
     mime="text/csv",
-    use_container_width=True,
 )
 
 # ----------------------------
@@ -203,7 +206,6 @@ st.download_button(
     data=metrics_csv,
     file_name="metrics.csv",
     mime="text/csv",
-    use_container_width=True,
 )
 
 st.success("✅ All export files are ready for download!")
@@ -240,7 +242,7 @@ metrics_df = pd.DataFrame(
 
 st.dataframe(
     metrics_df,
-    use_container_width=True,
+    width="stretch",
     hide_index=True,
 )
 
@@ -259,6 +261,6 @@ prediction_df = pd.DataFrame({
 
 st.dataframe(
     prediction_df.head(10),
-    use_container_width=True,
+    width="stretch",
     hide_index=True,
 )

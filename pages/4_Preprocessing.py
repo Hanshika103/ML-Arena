@@ -5,6 +5,11 @@ from ui.theme import load_theme
 
 load_theme()
 
+from utils.validators import validate_dataset
+
+if not validate_dataset():
+    st.stop()
+
 # ----------------------------
 # Session State Initialization
 # ----------------------------
@@ -52,10 +57,10 @@ if len(missing_values) > 0:
     })
 
     st.dataframe(
-        stats,
-        use_container_width=True,
-        hide_index=True
-    )
+    stats,
+    width="stretch",
+    hide_index=True
+)
 
 else:
     st.success("✅ No Missing Values Found")
@@ -210,10 +215,10 @@ if st.button("🚀 Apply Preprocessing"):
     st.subheader("📊 Processed Dataset Preview")
 
     st.dataframe(
-        processed,
-        use_container_width=True,
-        height=400
-    )
+    processed,
+    width="stretch",
+    height=400
+)
 # -------------------------
 # Download Processed Dataset
 # -------------------------
@@ -233,5 +238,5 @@ if st.session_state["processed_data"] is not None:
         data=csv,
         file_name="processed_dataset.csv",
         mime="text/csv",
-        use_container_width=True
+        
     )

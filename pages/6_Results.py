@@ -16,6 +16,11 @@ from sklearn.metrics import (
     precision_recall_curve,
 )
 
+from utils.validators import validate_model
+
+if not validate_model():
+    st.stop()
+
 from ui.theme import load_theme
 from sklearn.metrics import confusion_matrix
 import matplotlib.pyplot as plt
@@ -163,7 +168,7 @@ results_df = pd.DataFrame({
 
 st.dataframe(
     results_df.head(20),
-    use_container_width=True,
+    width="stretch",
     height=400,
 )
 # ----------------------------
@@ -177,7 +182,6 @@ st.download_button(
     data=csv,
     file_name="predictions.csv",
     mime="text/csv",
-    use_container_width=True,
 )
 
 
@@ -243,9 +247,9 @@ if task == "Classification":
     report_df = pd.DataFrame(report).transpose()
 
     st.dataframe(
-        report_df,
-        use_container_width=True,
-    )
+    report_df,
+    width="stretch",
+)
 
      # ----------------------------
 # ROC Curve
@@ -364,9 +368,9 @@ if hasattr(model, "feature_importances_"):
     st.pyplot(fig)
 
     st.dataframe(
-        importance_df,
-        use_container_width=True,
-    )
+    importance_df,
+    width="stretch",
+)
 
 
 
@@ -449,7 +453,7 @@ if not all(
 st.divider()
 
 st.subheader("🏆 Model Comparison")
-if st.button("Compare All Models", use_container_width=True):
+if st.button("Compare All Models", ):
 
     comparison_df = compare_models(
     st.session_state["X_train"],
@@ -461,7 +465,7 @@ if st.button("Compare All Models", use_container_width=True):
 
     st.dataframe(
     comparison_df,
-    use_container_width=True,
+    width="stretch",
 )
 
     best_model = comparison_df.iloc[0]["Model"]
@@ -471,9 +475,8 @@ if st.button("Compare All Models", use_container_width=True):
     csv = comparison_df.to_csv(index=False).encode("utf-8")
 
     st.download_button(
-        "⬇ Download Comparison Report",
-        data=csv,
-        file_name="model_comparison.csv",
-        mime="text/csv",
-        use_container_width=True,
-    )
+    "⬇ Download Comparison Report",
+    data=csv,
+    file_name="model_comparison.csv",
+    mime="text/csv",
+)

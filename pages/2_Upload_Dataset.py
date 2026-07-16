@@ -2,7 +2,13 @@ import streamlit as st
 import pandas as pd
 from ui.theme import load_theme
 
+from utils.cache_utils import load_csv
+from utils.error_handler import handle_error
+from utils.logger import get_logger
+
 load_theme()
+
+logger = get_logger()
 
 # ----------------------------
 # Session State Initialization
@@ -39,12 +45,13 @@ if uploaded_file is not None:
 
         # Read File
         if uploaded_file.name.endswith(".csv"):
-            df = pd.read_csv(uploaded_file)
+            df = load_csv(uploaded_file)
         else:
             df = pd.read_excel(uploaded_file)
 
         # Save in Session State
         st.session_state["dataset"] = df
+        logger.info(f"Dataset uploaded: {uploaded_file.name}")
 
         st.success("✅ Dataset uploaded successfully!")
 
@@ -63,11 +70,10 @@ if uploaded_file is not None:
         st.subheader("👀 Dataset Preview")
 
         st.dataframe(
-            df,
-            use_container_width=True,
-            height=400
-        )
-
+    df,
+    width="stretch",
+    height=400
+    )
         st.divider()
 
         # Dataset Info
@@ -98,7 +104,12 @@ if uploaded_file is not None:
         st.info("➡ Now open **Dataset Analysis** from the sidebar.")
 
     except Exception as e:
-        st.error(f"Error: {e}")
+        handle_error(
+        e,
+        "Unable to read the uploaded dataset."
+    )
+    st.stop()
+    
 
 else:
     st.info("📁 Please upload a dataset to continue.")

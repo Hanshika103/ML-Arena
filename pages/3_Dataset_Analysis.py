@@ -2,8 +2,15 @@ import streamlit as st
 import pandas as pd
 import matplotlib.pyplot as plt
 from ui.theme import load_theme
+from utils.cache_utils import get_dataset_summary
+from utils.logger import get_logger
+
 
 load_theme()
+from utils.validators import validate_dataset
+
+if not validate_dataset():
+    st.stop()
 
 # ----------------------------
 # Session State Initialization
@@ -19,14 +26,12 @@ if "target_column" not in st.session_state:
 # ----------------------------
 st.title("📊 Dataset Analysis")
 
-# ----------------------------
-# Check Dataset
-# ----------------------------
-if st.session_state["dataset"] is None:
-    st.warning("⚠️ Please upload a dataset first from the Upload Dataset page.")
-    st.stop()
+
 
 df = st.session_state["dataset"]
+logger = get_logger()
+logger.info("Dataset Analysis page opened.")
+summary = get_dataset_summary(df)
 
 st.success("✅ Dataset Loaded Successfully")
 
@@ -37,10 +42,10 @@ st.divider()
 # ----------------------------
 col1, col2, col3, col4 = st.columns(4)
 
-col1.metric("Rows", df.shape[0])
-col2.metric("Columns", df.shape[1])
-col3.metric("Missing Values", int(df.isnull().sum().sum()))
-col4.metric("Duplicate Rows", int(df.duplicated().sum()))
+col1.metric("Rows", summary["rows"])
+col2.metric("Columns", summary["columns"])
+col3.metric("Missing Values", summary["missing"])
+col4.metric("Duplicate Rows", summary["duplicates"])
 
 st.divider()
 
@@ -54,7 +59,7 @@ datatype_df = pd.DataFrame({
     "Data Type": df.dtypes.astype(str)
 })
 
-st.dataframe(datatype_df, use_container_width=True)
+width="stretch"
 
 st.divider()
 
@@ -68,7 +73,7 @@ missing_df = pd.DataFrame({
     "Missing Values": df.isnull().sum().values
 })
 
-st.dataframe(missing_df, use_container_width=True)
+st.dataframe(missing_df, )
 
 st.divider()
 
@@ -79,7 +84,7 @@ st.subheader("📈 Statistical Summary")
 
 st.dataframe(
     df.describe(include="all"),
-    use_container_width=True
+    
 )
 
 st.divider()
