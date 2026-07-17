@@ -1,217 +1,537 @@
-/* ==========================
-   Main App
-========================== */
 
-.stApp{
-    background:#F8FAFC;
-    color:#1F2937;
-}
-
-/* ==========================
-   Content Width
-========================== */
-
-.block-container{
-    max-width:95%;
-    padding-top:2rem;
-    padding-left:2rem;
-    padding-right:2rem;
-}
+/* ==========================================
+   DAY 8 UI POLISH
+========================================== */
 
 /* ==========================
    Hero Section
 ========================== */
 
 .hero{
-    background:linear-gradient(135deg,#FFF9E6,#F6E6A9);
-    color:#1F2937;
-    padding:35px;
-    border-radius:22px;
-    border:1px solid #E8E2C8;
-    box-shadow:0 10px 25px rgba(0,0,0,.08);
-    margin-bottom:25px;
+
+    background:linear-gradient(
+        135deg,
+        #FFFDF7 0%,
+        #FFF6D8 100%
+    );
+
+    padding:32px;
+
+    border-radius:24px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow-md);
+
+    margin-bottom:30px;
+
+    position:relative;
+
+    overflow:hidden;
+}
+
+.hero::before{
+
+    content:"";
+
+    position:absolute;
+
+    width:180px;
+    height:180px;
+
+    background:rgba(200,155,60,.08);
+
+    border-radius:50%;
+
+    top:-90px;
+
+    right:-70px;
 }
 
 .hero h1{
-    color:#B8860B;
-    font-size:3rem;
+
+    color:var(--heading);
+
+    font-size:38px;
+
+    font-weight:800;
+
+    margin-bottom:10px;
 }
 
 .hero h3{
-    color:#374151;
+
+    color:var(--primary-dark);
+
+    font-size:24px;
+
+    margin-bottom:12px;
 }
 
 .hero p{
-    color:#4B5563;
+
+    color:var(--text);
+
     font-size:17px;
+
+    line-height:1.8;
+}
+/* Smooth Animations */
+
+.card,
+.hero,
+.stButton>button,
+.stDownloadButton>button,
+[data-testid="metric-container"]{
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
+}
+/* -------------------------------------- */
+/* Cards */
+/* -------------------------------------- */
+
+.card{
+
+    background:var(--card);
+
+    padding:24px;
+
+    border-radius:20px;
+
+    border:1px solid var(--border);
+
+    box-shadow:var(--shadow-sm);
+
+    margin-bottom:20px;
+
+    transition:.35s ease;
 }
 
-/* ==========================
-   Sidebar
-========================== */
+.card:hover{
 
-section[data-testid="stSidebar"]{
-    background:#FFFFFF;
-    border-right:1px solid #E5E7EB;
+    transform:translateY(-4px);
+
+    box-shadow:var(--shadow-lg);
+
+    border-color:rgba(200,155,60,.35);
 }
 
-section[data-testid="stSidebar"] *{
-    color:#1F2937 !important;
+.card h3{
+
+    color:var(--heading);
+
+    margin-bottom:12px;
+
+    font-size:22px;
 }
 
-/* ==========================
-   Headings
-========================== */
+.card p{
 
-/* Titles */
+    color:var(--text);
 
-h1{
-    color:#B8860B;
+    line-height:1.7;
 }
 
-h2,h3{
-    color:#374151;
-}
+.stButton>button,
+.stDownloadButton>button{
 
-/* Normal text */
+    min-width:140px;
 
-p, label, span{
-    color:#1F2937;
-}
+    background:var(--primary)!important;
 
-/* ==========================
-   Buttons
-========================== */
-
-.stButton>button{
-
-    background:#D4A017 !important;
-    color:white !important;
+    color:white!important;
 
     border:none;
 
-    border-radius:10px;
+    border-radius:14px;
+
+    padding:.7rem 1rem;
+
+    font-size:16px;
 
     font-weight:600;
+
+    box-shadow:var(--shadow-sm);
 
     transition:.3s;
 }
 
-.stButton>button:hover{
+.stButton>button:hover,
+.stDownloadButton>button:hover{
 
-    background:#B8860B !important;
+    background:var(--primary-dark)!important;
 
-    transform:translateY(-2px);
+    transform:translateY(-3px);
 
-    box-shadow:0 6px 16px rgba(212,160,23,.35);
+    box-shadow:var(--shadow-md);
+}
+/* -------------------------------------- */
+/* Metric Hover */
+/* -------------------------------------- */
+
+[data-testid="metric-container"]{
+
+    background:var(--card);
+
+    border:none;
+
+    border-radius:18px;
+
+    padding:18px;
+
+    box-shadow:var(--shadow-sm);
+
+    transition:.3s;
 }
 
-/* Download Button */
+[data-testid="metric-container"]:hover{
 
-.stDownloadButton>button{
+    transform:translateY(-5px);
+
+    box-shadow:var(--shadow-lg);
+}
+
+[data-testid="stFileUploader"]{
+
+    background:#FFFDF8;
+
+    border:2px dashed var(--primary);
+
+    border-radius:20px;
+
+    padding:25px;
+
+    transition:.3s;
+}
+
+[data-testid="stFileUploader"]:hover{
+
+    background:#FFF9EB;
+}
+[data-testid="metric-container"] label{
+
+    color:var(--text);
+
+    font-weight:600;
+}
+
+[data-testid="metric-container"] [data-testid="stMetricValue"]{
+
+    color:var(--heading);
+
+    font-size:30px;
+
+    font-weight:700;
+}
+[data-testid="stFileUploader"]:hover{
+
+    background:#FFF9EB;
+
+    border-color:var(--primary-dark);
+}
+
+/* -------------------------------------- */
+/* Sidebar */
+/* -------------------------------------- */
+
+section[data-testid="stSidebar"]{
+
+    box-shadow:5px 0 18px rgba(0,0,0,.05);
+}
+
+/* -------------------------------------- */
+/* Tabs */
+/* -------------------------------------- */
+
+.stTabs [role="tab"]{
+
+    border-radius:12px;
+
+    padding:10px 18px;
+    transition:.3s;
+
+    font-weight:600;
+}
+
+.stTabs [aria-selected="true"]{
 
     background:#D4A017 !important;
 
     color:white !important;
 
-    border:none;
-
-    border-radius:10px;
+    border-radius:12px;
 }
 
-/* ==========================
-   Metrics
-========================== */
+/* -------------------------------------- */
+/* Text Input */
+/* -------------------------------------- */
 
-[data-testid="metric-container"]{
-
-    background:white;
-
-    border-radius:16px;
-
-    border-left:6px solid #D4A017;
-
-    box-shadow:0 6px 18px rgba(0,0,0,.08);
-
-    padding:18px;
-}
-
-/* ==========================
-   File Upload
-========================== */
-
-[data-testid="stFileUploader"]{
-
-    border:2px dashed #D4A017;
-
-    border-radius:16px;
-
-    background:#FFFDF7;
-
-    padding:15px;
-}
-
-/* ==========================
-   DataFrame
-========================== */
-
-[data-testid="stDataFrame"]{
-
-    border-radius:16px;
-
-    overflow:hidden;
-
-    border:1px solid #E5E7EB;
-
-    box-shadow:0 4px 12px rgba(0,0,0,.06);
-}
-
-/* ==========================
-   Selectbox
-========================== */
-
-.stSelectbox>div>div{
+.stTextInput input,
+.stNumberInput input{
 
     border-radius:10px;
 
     border:1px solid #D4A017;
 }
 
+/* -------------------------------------- */
+/* Multiselect */
+/* -------------------------------------- */
+
+.stMultiSelect{
+
+    border-radius:10px;
+}
+
+/* -------------------------------------- */
+/* Expander */
+/* -------------------------------------- */
+
+.streamlit-expanderHeader{
+
+    font-weight:600;
+
+    color:var(--heading);
+}
+
+/* -------------------------------------- */
+/* Progress */
+/* -------------------------------------- */
+
+.stProgress > div > div{
+
+    background:#D4A017;
+}
+
+/* -------------------------------------- */
+/* Plotly */
+/* -------------------------------------- */
+
+.js-plotly-plot{
+
+    border-radius:18px;
+
+    overflow:hidden;
+}
+
+/* -------------------------------------- */
+/* Scrollbar */
+/* -------------------------------------- */
+
+::-webkit-scrollbar{
+
+    width:10px;
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
+
+    border-radius:20px;
+}
+
+::-webkit-scrollbar-track{
+
+    background:#F3F4F6;
+}
+
+:root{
+
+    --primary:#C89B3C;
+    --primary-dark:#B5831D;
+
+    --background:#F8FAFC;
+
+    --card:#FFFFFF;
+
+    --border:#E5E7EB;
+
+    --heading:#1F2937;
+
+    --text:#4B5563;
+
+    --success:#10B981;
+
+    --warning:#F59E0B;
+
+    --danger:#EF4444;
+
+    --radius:18px;
+
+    --shadow-sm:0 4px 12px rgba(15,23,42,.06);
+
+    --shadow-md:0 10px 24px rgba(15,23,42,.10);
+
+    --shadow-lg:0 18px 40px rgba(15,23,42,.15);
+
+}
+
+/* ==========================================
+   DESIGN TOKENS (Day 8 - Phase 2)
+========================================== */
+
+
+
 /* ==========================
-   Radio
+   Section Header
 ========================== */
 
-.stRadio{
+.section-title{
 
-    padding:10px;
+    font-size:30px;
 
-    border-radius:12px;
+    font-weight:700;
 
-    background:white;
+    color:var(--heading);
+
+    margin-bottom:6px;
+}
+
+.section-subtitle{
+
+    color:var(--text);
+
+    font-size:16px;
+
+    margin-bottom:22px;
+}
+/* ==========================
+   Status Badge
+========================== */
+
+.badge{
+
+    display:inline-block;
+
+    padding:6px 14px;
+
+    border-radius:999px;
+
+    background:#FFF6D8;
+
+    color:var(--primary-dark);
+
+    font-size:13px;
+
+    font-weight:600;
+
+    border:1px solid rgba(200,155,60,.25);
+}
+/* ==========================
+   Feature Card
+========================== */
+
+.feature-card{
+
+    background:var(--card);
+
+    padding:26px;
+
+    border-radius:20px;
+
+    border:1px solid var(--border);
+
+    box-shadow:4px 0 14px rgba(15,23,42,.06);
+
+    text-align:center;
+
+    height:100%;
+
+    transition:.35s;
+}
+
+.feature-card:hover{
+
+    transform:translateY(-8px);
+
+    box-shadow:var(--shadow-lg);
+}
+
+.feature-card .icon{
+
+    font-size:42px;
+
+    margin-bottom:15px;
+}
+
+.feature-card h3{
+
+    margin-bottom:10px;
+
+    color:var(--heading);
+}
+
+.feature-card p{
+
+    color:var(--text);
+
+    font-size:15px;
+
+    line-height:1.7;
 }
 
 /* ==========================
-   Checkbox
+   Info Card
 ========================== */
 
-.stCheckbox{
+.info-card{
 
-    padding:6px;
+    background:#FFFFFF;
+
+    border-left:5px solid var(--primary);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow-sm);
+
+    margin-bottom:18px;
 }
-
 /* ==========================
-   Info Box
+   Recommendation Card
 ========================== */
 
-[data-testid="stAlert"]{
+.recommendation{
 
-    border-radius:12px;
+    background:#F0FDF4;
+
+    border-left:5px solid var(--success);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow-sm);
 }
-
 /* ==========================
-   Divider
+   Warning Card
 ========================== */
 
-hr{
-    border:1px solid #ECECEC;
+.warning-card{
+
+    background:#FFFBEB;
+
+    border-left:5px solid var(--warning);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow-sm);
+}
+/* ==========================
+   Smooth Hover
+========================== */
+
+.card,
+.feature-card,
+.info-card{
+
+    transition:
+        transform .35s ease,
+        box-shadow .35s ease;
 }
