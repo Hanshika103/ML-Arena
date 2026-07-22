@@ -1,6 +1,9 @@
 import streamlit as st
 import pandas as pd
-from utils.comparison import compare_models
+import numpy as np
+import matplotlib.pyplot as plt
+
+
 from sklearn.metrics import (
     accuracy_score,
     precision_score,
@@ -16,24 +19,29 @@ from sklearn.metrics import (
     precision_recall_curve,
 )
 
+from ui.theme import load_theme
 from utils.validators import validate_model
+from utils.comparison import compare_models
+from utils.logger import get_logger
+
+# ==========================================================
+# Load Theme
+# ==========================================================
+
+load_theme()
+logger = get_logger()
+
+
+# ==========================================================
+# Validate Model
+# ==========================================================
 
 if not validate_model():
     st.stop()
 
-from ui.theme import load_theme
-from sklearn.metrics import confusion_matrix
-import matplotlib.pyplot as plt
-
-import numpy as np
-
-
-
-load_theme()
-
-# ----------------------------
-# Session State Check
-# ----------------------------
+# ==========================================================
+# Check Session State
+# ==========================================================
 
 required = [
     "trained_model",
@@ -57,36 +65,67 @@ if st.session_state["trained_model"] is None:
 
     st.stop()
 
-# ----------------------------
+# ==========================================================
 # Load Data
-# ----------------------------
+# ==========================================================
 
+model = st.session_state["trained_model"]
 predictions = st.session_state["predictions"]
 
 y_test = st.session_state["y_test"]
+X_test = st.session_state["X_test"]
 
 task = st.session_state["task"]
-
 model_name = st.session_state["model_name"]
+
+logger.info(
+    f"Results page opened | Task={task} | Model={model_name}"
+)
+
+# ==========================================================
+# Page Title
+# ==========================================================
 
 st.title("📈 Model Results")
 
 st.success("✅ Results Generated Successfully")
-st.write("Task:", task)
-st.write("Model:", model_name)
-st.write("Predictions Length:", len(predictions))
-st.write("Y Test Length:", len(y_test))
-
-# ----------------------------
-# Performance Metrics
-# ----------------------------
 
 st.divider()
+
+# ==========================================================
+# Summary
+# ==========================================================
+
+col1, col2 = st.columns(2)
+
+with col1:
+
+    st.metric(
+        "Task",
+        task,
+    )
+
+with col2:
+
+    st.metric(
+        "Model",
+        model_name,
+    )
+
+st.divider()
+
+# ==========================================================
+# Performance Metrics
+# ==========================================================
+
 st.subheader("📊 Performance Metrics")
 
 if task == "Classification":
 
-    accuracy = accuracy_score(y_test, predictions)
+    accuracy = accuracy_score(
+        y_test,
+        predictions,
+    )
 
     precision = precision_score(
         y_test,
@@ -108,7 +147,7 @@ if task == "Classification":
         average="weighted",
         zero_division=0,
     )
-    # Save Metrics
+
     st.session_state["metrics"] = {
         "Accuracy": round(accuracy, 4),
         "Precision": round(precision, 4),
@@ -119,86 +158,147 @@ if task == "Classification":
     c1, c2 = st.columns(2)
 
     with c1:
-        st.metric("Accuracy", f"{accuracy:.4f}")
-        st.metric("Precision", f"{precision:.4f}")
+
+        st.metric(
+            "Accuracy",
+            f"{accuracy:.4f}",
+        )
+
+        st.metric(
+            "Precision",
+            f"{precision:.4f}",
+        )
 
     with c2:
-        st.metric("Recall", f"{recall:.4f}")
-        st.metric("F1 Score", f"{f1:.4f}")
+
+        st.metric(
+            "Recall",
+            f"{recall:.4f}",
+        )
+
+        st.metric(
+            "F1 Score",
+            f"{f1:.4f}",
+        )
 
 else:
 
-    mae = mean_absolute_error(y_test, predictions)
-    mse = mean_squared_error(y_test, predictions)
+    mae = mean_absolute_error(
+        y_test,
+        predictions,
+    )
+
+    mse = mean_squared_error(
+        y_test,
+        predictions,
+    )
+
     rmse = mse ** 0.5
-    r2 = r2_score(y_test, predictions)
-    # Save Metrics
+
+    r2 = r2_score(
+        y_test,
+        predictions,
+    )
+
     st.session_state["metrics"] = {
-    "MAE": round(mae, 4),
-    "MSE": round(mse, 4),
-    "RMSE": round(rmse, 4),
-    "R2 Score": round(r2, 4),
+        "MAE": round(mae, 4),
+        "MSE": round(mse, 4),
+        "RMSE": round(rmse, 4),
+        "R2 Score": round(r2, 4),
     }
 
     c1, c2 = st.columns(2)
 
     with c1:
-        st.metric("MAE", f"{mae:.4f}")
-        st.metric("MSE", f"{mse:.4f}")
+
+        st.metric(
+            "MAE",
+            f"{mae:.4f}",
+        )
+
+        st.metric(
+            "MSE",
+            f"{mse:.4f}",
+        )
 
     with c2:
-        st.metric("RMSE", f"{rmse:.4f}")
-        st.metric("R² Score", f"{r2:.4f}")
-# ----------------------------
-# Predictions Preview
-# ----------------------------
 
-# ----------------------------
-# Predictions Preview
-# ----------------------------
+        st.metric(
+            "RMSE",
+            f"{rmse:.4f}",
+        )
+
+        st.metric(
+            "R² Score",
+            f"{r2:.4f}",
+        )
 
 st.divider()
+# ==========================================================
+# Predictions Preview
+# ==========================================================
 
 st.subheader("📋 Predictions Preview")
 
-results_df = pd.DataFrame({
-    "Actual": y_test.reset_index(drop=True),
-    "Predicted": predictions
-})
+results_df = pd.DataFrame(
+    {
+        "Actual": y_test.reset_index(drop=True),
+        "Predicted": predictions,
+    }
+)
 
 st.dataframe(
     results_df.head(20),
     width="stretch",
     height=400,
+    hide_index=True,
 )
-# ----------------------------
-# Download Predictions
-# ----------------------------
 
-csv = results_df.to_csv(index=False).encode("utf-8")
+st.divider()
+
+# ==========================================================
+# Download Predictions
+# ==========================================================
+
+csv = results_df.to_csv(
+    index=False
+).encode("utf-8")
 
 st.download_button(
     "⬇ Download Predictions",
     data=csv,
     file_name="predictions.csv",
     mime="text/csv",
+    width="stretch",
+    key="prediction_download_1",
 )
 
-
-
+# ==========================================================
+# Classification Visualizations
+# ==========================================================
 
 if task == "Classification":
-# ----------------------------
-# Confusion Matrix
-# ----------------------------
+
+    # ------------------------------------------------------
+    # Confusion Matrix
+    # ------------------------------------------------------
 
     st.divider()
 
     st.subheader("📊 Confusion Matrix")
 
-    cm = confusion_matrix(y_test, predictions)
+    cm = confusion_matrix(
+        y_test,
+        predictions,
+    )
 
-    fig, ax = plt.subplots(figsize=(5, 4))
+    classes = sorted(
+        y_test.unique()
+    )
+
+    fig, ax = plt.subplots(
+        figsize=(6, 5)
+    )
 
     image = ax.imshow(cm)
 
@@ -206,20 +306,24 @@ if task == "Classification":
     ax.set_ylabel("Actual Label")
     ax.set_title("Confusion Matrix")
 
-    classes = sorted(y_test.unique())
+    ax.set_xticks(
+        range(len(classes))
+    )
 
-    ax.set_xticks(range(len(classes)))
-    ax.set_yticks(range(len(classes)))
+    ax.set_yticks(
+        range(len(classes))
+    )
 
     ax.set_xticklabels(classes)
     ax.set_yticklabels(classes)
 
     for i in range(len(classes)):
         for j in range(len(classes)):
+
             ax.text(
                 j,
                 i,
-                    cm[i, j],
+                cm[i, j],
                 ha="center",
                 va="center",
                 fontsize=12,
@@ -229,9 +333,11 @@ if task == "Classification":
 
     st.pyplot(fig)
 
-# ----------------------------
-# Classification Report
-# ----------------------------
+    plt.close(fig)
+
+    # ------------------------------------------------------
+    # Classification Report
+    # ------------------------------------------------------
 
     st.divider()
 
@@ -244,239 +350,251 @@ if task == "Classification":
         zero_division=0,
     )
 
-    report_df = pd.DataFrame(report).transpose()
+    report_df = (
+        pd.DataFrame(report)
+        .transpose()
+        .round(4)
+    )
 
     st.dataframe(
-    report_df,
+        report_df,
+        width="stretch",
+    )
+
+    st.divider()
+    # ==========================================================
+# Predictions Preview
+# ==========================================================
+
+st.subheader("📋 Predictions Preview")
+
+results_df = pd.DataFrame(
+    {
+        "Actual": y_test.reset_index(drop=True),
+        "Predicted": predictions,
+    }
+)
+
+st.dataframe(
+    results_df.head(20),
     width="stretch",
+    height=400,
+    hide_index=True,
 )
 
-     # ----------------------------
-# ROC Curve
-# ----------------------------
-
-model = st.session_state["trained_model"]
-X_test = st.session_state["X_test"]
-
-if (
-    task == "Classification"
-    and len(np.unique(y_test)) == 2
-    and hasattr(model, "predict_proba")
-):
-
-    st.divider()
-    st.subheader("📈 ROC Curve")
-
-    y_prob = model.predict_proba(X_test)[:, 1]
-
-    fpr, tpr, _ = roc_curve(y_test, y_prob)
-
-    roc_auc = auc(fpr, tpr)
-
-    fig, ax = plt.subplots(figsize=(6, 5))
-
-    ax.plot(
-        fpr,
-        tpr,
-        label=f"AUC = {roc_auc:.3f}",
-    )
-
-    ax.plot(
-        [0, 1],
-        [0, 1],
-        linestyle="--",
-    )
-
-    ax.set_xlabel("False Positive Rate")
-    ax.set_ylabel("True Positive Rate")
-    ax.set_title("ROC Curve")
-    ax.legend()
-
-    st.pyplot(fig)
-
-    # ----------------------------
-# Precision-Recall Curve
-# ----------------------------
-
-if (
-    task == "Classification"
-    and len(np.unique(y_test)) == 2
-    and hasattr(model, "predict_proba")
-):
-
-    st.divider()
-    st.subheader("📊 Precision-Recall Curve")
-
-    precision, recall, _ = precision_recall_curve(
-        y_test,
-        y_prob,
-    )
-
-    fig, ax = plt.subplots(figsize=(6, 5))
-
-    ax.plot(
-        recall,
-        precision,
-    )
-
-    ax.set_xlabel("Recall")
-    ax.set_ylabel("Precision")
-    ax.set_title("Precision-Recall Curve")
-
-    st.pyplot(fig)
-
-    # ----------------------------
-# Feature Importance
-# ----------------------------
-
-model = st.session_state["trained_model"]
-
-if hasattr(model, "feature_importances_"):
-
-    st.divider()
-    st.subheader("🌳 Feature Importance")
-
-    feature_names = st.session_state.get(
-        "feature_names",
-        [f"Feature {i+1}" for i in range(len(model.feature_importances_))]
-    )
-
-    importance_df = pd.DataFrame(
-        {
-            "Feature": feature_names,
-            "Importance": model.feature_importances_,
-        }
-    )
-
-    importance_df = importance_df.sort_values(
-        by="Importance",
-        ascending=False,
-    )
-
-    fig, ax = plt.subplots(figsize=(8, 5))
-
-    ax.barh(
-        importance_df["Feature"],
-        importance_df["Importance"],
-    )
-
-    ax.invert_yaxis()
-
-    ax.set_xlabel("Importance")
-    ax.set_title("Feature Importance")
-
-    st.pyplot(fig)
-
-    st.dataframe(
-    importance_df,
-    width="stretch",
-)
-
-
-
-else: 
-# ----------------------------
-# Actual vs Predicted Plot
-# ----------------------------
-
-    st.divider()
-
-    st.subheader("📈 Actual vs Predicted")
-
-    fig, ax = plt.subplots(figsize=(6, 5))
-
-    ax.scatter(
-        y_test,
-        predictions,
-        alpha=0.7,
-    )
-
-
-# Perfect Prediction Line
-    min_val = min(min(y_test), min(predictions))
-    max_val = max(max(y_test), max(predictions))
-
-    ax.plot(
-    [min_val, max_val],
-    [min_val, max_val],
-    linestyle="--",
-)
-
-    ax.set_xlabel("Actual Values")
-    ax.set_ylabel("Predicted Values")
-    ax.set_title("Actual vs Predicted")
-
-    st.pyplot(fig)
-
-   
-    
-# ----------------------------
-# Residual Plot
-# ----------------------------
-
-    st.divider()    
-
-    st.subheader("📉 Residual Plot")    
-
-    residuals = y_test - predictions    
-
-    fig, ax = plt.subplots(figsize=(6, 5))  
-
-    ax.scatter(
-        predictions,
-        residuals,
-        alpha=0.7,
-    )
-
-    ax.axhline(
-        y=0,
-        linestyle="--",
-    )
-
-    ax.set_xlabel("Predicted Values")
-    ax.set_ylabel("Residuals")
-    ax.set_title("Residual Plot")
-
-    st.pyplot(fig)
-
-    
-
-    # ----------------------------
-# Model Comparison
-# ----------------------------
-if not all(
-    key in st.session_state
-    for key in ["X_train", "X_test", "y_train", "y_test"]
-):
-    st.warning("⚠ Please train the model first.")
-    st.stop()
 st.divider()
 
-st.subheader("🏆 Model Comparison")
-if st.button("Compare All Models", ):
+# ==========================================================
+# Download Predictions
+# ==========================================================
 
-    comparison_df = compare_models(
-    st.session_state["X_train"],
-    st.session_state["X_test"],
-    st.session_state["y_train"],
-    st.session_state["y_test"],
-    st.session_state["task"],
+csv = results_df.to_csv(
+    index=False
+).encode("utf-8")
+
+st.download_button(
+    "⬇ Download Predictions",
+    data=csv,
+    file_name="predictions.csv",
+    mime="text/csv",
+    width="stretch",
+    key="prediction_download_2",
 )
+
+# ==========================================================
+# Classification Visualizations
+# ==========================================================
+
+if task == "Classification":
+
+    # ------------------------------------------------------
+    # Confusion Matrix
+    # ------------------------------------------------------
+
+    st.divider()
+
+    st.subheader("📊 Confusion Matrix")
+
+    cm = confusion_matrix(
+        y_test,
+        predictions,
+    )
+
+    classes = sorted(
+        y_test.unique()
+    )
+
+    fig, ax = plt.subplots(
+        figsize=(6, 5)
+    )
+
+    image = ax.imshow(cm)
+
+    ax.set_xlabel("Predicted Label")
+    ax.set_ylabel("Actual Label")
+    ax.set_title("Confusion Matrix")
+
+    ax.set_xticks(
+        range(len(classes))
+    )
+
+    ax.set_yticks(
+        range(len(classes))
+    )
+
+    ax.set_xticklabels(classes)
+    ax.set_yticklabels(classes)
+
+    for i in range(len(classes)):
+        for j in range(len(classes)):
+
+            ax.text(
+                j,
+                i,
+                cm[i, j],
+                ha="center",
+                va="center",
+                fontsize=12,
+            )
+
+    plt.colorbar(image)
+
+    st.pyplot(fig)
+
+    plt.close(fig)
+
+    # ------------------------------------------------------
+    # Classification Report
+    # ------------------------------------------------------
+
+    st.divider()
+
+    st.subheader("📄 Classification Report")
+
+    report = classification_report(
+        y_test,
+        predictions,
+        output_dict=True,
+        zero_division=0,
+    )
+
+    report_df = (
+        pd.DataFrame(report)
+        .transpose()
+        .round(4)
+    )
 
     st.dataframe(
-    comparison_df,
-    width="stretch",
+        report_df,
+        width="stretch",
+    )
+
+    st.divider()
+    # ==========================================================
+# Model Comparison
+# ==========================================================
+
+st.subheader("🏆 Model Comparison")
+
+required_keys = [
+    "X_train",
+    "X_test",
+    "y_train",
+    "y_test",
+]
+
+if not all(
+    key in st.session_state and st.session_state[key] is not None
+    for key in required_keys
+):
+    st.warning("⚠ Please train a model first.")
+    st.stop()
+
+if st.button(
+    "🔍 Compare All Models",
+    type="primary",
+):
+
+    try:
+
+        with st.spinner("Comparing models..."):
+
+            comparison_df = compare_models(
+                st.session_state["X_train"],
+                st.session_state["X_test"],
+                st.session_state["y_train"],
+                st.session_state["y_test"],
+                st.session_state["task"],
+            )
+
+        if comparison_df.empty:
+
+            st.warning("No comparison results available.")
+
+        else:
+
+            st.success("✅ Model comparison completed successfully!")
+
+            st.dataframe(
+                comparison_df,
+                width="stretch",
+                hide_index=True,
+            )
+
+            best_model = comparison_df.iloc[0]["Model"]
+
+            st.session_state["best_model"] = best_model
+
+            st.success(
+                f"🏆 Recommended Model: **{best_model}**"
+            )
+
+            st.divider()
+
+            st.subheader("📌 Recommendation")
+
+            st.info(
+                f"""
+**Recommended Model:** {best_model}
+
+This model achieved the best overall performance on your dataset
+based on the evaluation metrics.
+
+You can export this report from the Export page.
+"""
+            )
+
+            csv = comparison_df.to_csv(
+                index=False
+            ).encode("utf-8")
+
+            st.download_button(
+                "⬇ Download Comparison Report",
+                data=csv,
+                file_name="model_comparison.csv",
+                mime="text/csv",
+                width="stretch",
+                key="comparison_download",
+            )
+
+    except Exception as e:
+
+        logger.exception(e)
+
+        st.error(
+            f"❌ Model comparison failed.\n\n{e}"
+        )
+
+st.divider()
+
+# ==========================================================
+# Next Step
+# ==========================================================
+
+st.success(
+    "🎉 Model evaluation completed successfully!"
 )
 
-    best_model = comparison_df.iloc[0]["Model"]
-
-    st.success(f"🏆 Best Model: {best_model}")
-
-    csv = comparison_df.to_csv(index=False).encode("utf-8")
-
-    st.download_button(
-    "⬇ Download Comparison Report",
-    data=csv,
-    file_name="model_comparison.csv",
-    mime="text/csv",
+st.info(
+    "➡ Open the **Export** page to download the trained model, predictions, metrics, and reports."
 )

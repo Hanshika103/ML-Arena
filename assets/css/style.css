@@ -1,13 +1,76 @@
+/* ==========================================================
+   ML ARENA - PRODUCTION UI
+   PART 1 : DESIGN TOKENS + GLOBAL + HERO + BUTTONS
+========================================================== */
 
-/* ==========================================
-   DAY 8 UI POLISH
-========================================== */
+/* ==========================================================
+   DESIGN TOKENS
+========================================================== */
 
-/* ==========================
-   Hero Section
-========================== */
+:root{
+
+    --primary:#C89B3C;
+    --primary-dark:#B5831D;
+
+    --background:#F8FAFC;
+    --card:#FFFFFF;
+
+    --border:#E5E7EB;
+
+    --heading:#1F2937;
+    --text:#4B5563;
+
+    --success:#10B981;
+    --warning:#F59E0B;
+    --danger:#EF4444;
+
+    --radius:18px;
+
+    --shadow-sm:0 4px 12px rgba(15,23,42,.06);
+    --shadow-md:0 10px 24px rgba(15,23,42,.10);
+    --shadow-lg:0 18px 40px rgba(15,23,42,.15);
+
+}
+
+/* ==========================================================
+   GLOBAL
+========================================================== */
+
+html{
+
+    scroll-behavior:smooth;
+
+}
+
+body{
+
+    background:var(--background);
+
+    color:var(--text);
+
+}
+
+/* Smooth Animation */
+
+*{
+
+    transition:
+        background-color .25s ease,
+        color .25s ease,
+        border-color .25s ease,
+        box-shadow .25s ease;
+
+}
+
+/* ==========================================================
+   HERO
+========================================================== */
 
 .hero{
+
+    position:relative;
+
+    overflow:hidden;
 
     background:linear-gradient(
         135deg,
@@ -15,19 +78,16 @@
         #FFF6D8 100%
     );
 
-    padding:32px;
+    border:1px solid var(--border);
 
     border-radius:24px;
 
-    border:1px solid var(--border);
-
-    box-shadow:var(--shadow-md);
+    padding:36px;
 
     margin-bottom:30px;
 
-    position:relative;
+    box-shadow:var(--shadow-md);
 
-    overflow:hidden;
 }
 
 .hero::before{
@@ -39,24 +99,25 @@
     width:180px;
     height:180px;
 
-    background:rgba(200,155,60,.08);
+    top:-90px;
+    right:-70px;
 
     border-radius:50%;
 
-    top:-90px;
+    background:rgba(200,155,60,.08);
 
-    right:-70px;
 }
 
 .hero h1{
 
     color:var(--heading);
 
-    font-size:38px;
+    font-size:40px;
 
     font-weight:800;
 
-    margin-bottom:10px;
+    margin-bottom:12px;
+
 }
 
 .hero h3{
@@ -65,58 +126,78 @@
 
     font-size:24px;
 
-    margin-bottom:12px;
+    margin-bottom:16px;
+
 }
 
 .hero p{
 
     color:var(--text);
 
+    line-height:1.8;
+
     font-size:17px;
 
-    line-height:1.8;
-}
-/* Smooth Animations */
+    max-width:900px;
 
-.card,
-.hero,
-.stButton>button,
-.stDownloadButton>button,
-[data-testid="metric-container"]{
-    transition:
-        background-color .25s ease,
-        color .25s ease,
-        box-shadow .25s ease,
-        transform .25s ease;
 }
-/* -------------------------------------- */
-/* Cards */
-/* -------------------------------------- */
+
+/* ==========================================================
+   SECTION HEADINGS
+========================================================== */
+
+.section-title{
+
+    font-size:30px;
+
+    font-weight:700;
+
+    color:var(--heading);
+
+    margin-bottom:8px;
+
+}
+
+.section-subtitle{
+
+    color:var(--text);
+
+    font-size:16px;
+
+    margin-bottom:24px;
+
+}
+
+/* ==========================================================
+   GENERIC CARD
+========================================================== */
 
 .card{
 
     background:var(--card);
 
-    padding:24px;
+    border:1px solid var(--border);
 
     border-radius:20px;
 
-    border:1px solid var(--border);
-
-    box-shadow:var(--shadow-sm);
+    padding:24px;
 
     margin-bottom:20px;
 
+    box-shadow:var(--shadow-sm);
+
     transition:.35s ease;
+
 }
 
 .card:hover{
 
-    transform:translateY(-4px);
+    transform:translateY(-6px);
 
     box-shadow:var(--shadow-lg);
 
     border-color:rgba(200,155,60,.35);
+
 }
 
 .card h3{
@@ -125,7 +206,6 @@
 
     margin-bottom:12px;
 
-    font-size:22px;
 }
 
 .card p{
@@ -133,22 +213,27 @@
     color:var(--text);
 
     line-height:1.7;
+
 }
+
+/* ==========================================================
+   BUTTONS
+========================================================== */
 
 .stButton>button,
 .stDownloadButton>button{
 
-    min-width:140px;
-
-    background:var(--primary)!important;
-
-    color:white!important;
+    min-width:150px;
 
     border:none;
 
     border-radius:14px;
 
-    padding:.7rem 1rem;
+    padding:.75rem 1.2rem;
+
+    background:var(--primary)!important;
+
+    color:#FFFFFF!important;
 
     font-size:16px;
 
@@ -157,6 +242,7 @@
     box-shadow:var(--shadow-sm);
 
     transition:.3s;
+
 }
 
 .stButton>button:hover,
@@ -167,24 +253,27 @@
     transform:translateY(-3px);
 
     box-shadow:var(--shadow-md);
+
 }
-/* -------------------------------------- */
-/* Metric Hover */
-/* -------------------------------------- */
+
+/* ==========================================================
+   METRICS
+========================================================== */
 
 [data-testid="metric-container"]{
 
     background:var(--card);
 
-    border:none;
-
     border-radius:18px;
 
     padding:18px;
 
+    border:1px solid var(--border);
+
     box-shadow:var(--shadow-sm);
 
     transition:.3s;
+
 }
 
 [data-testid="metric-container"]:hover{
@@ -192,30 +281,15 @@
     transform:translateY(-5px);
 
     box-shadow:var(--shadow-lg);
+
 }
 
-[data-testid="stFileUploader"]{
-
-    background:#FFFDF8;
-
-    border:2px dashed var(--primary);
-
-    border-radius:20px;
-
-    padding:25px;
-
-    transition:.3s;
-}
-
-[data-testid="stFileUploader"]:hover{
-
-    background:#FFF9EB;
-}
 [data-testid="metric-container"] label{
 
     color:var(--text);
 
     font-weight:600;
+
 }
 
 [data-testid="metric-container"] [data-testid="stMetricValue"]{
@@ -225,182 +299,290 @@
     font-size:30px;
 
     font-weight:700;
+
 }
+
+/* ==========================================================
+   FILE UPLOADER
+========================================================== */
+
+[data-testid="stFileUploader"]{
+
+    background:#FFFDF8;
+
+    border:2px dashed var(--primary);
+
+    border-radius:20px;
+
+    padding:24px;
+
+    transition:.3s;
+
+}
+
 [data-testid="stFileUploader"]:hover{
 
     background:#FFF9EB;
 
     border-color:var(--primary-dark);
+
 }
 
-/* -------------------------------------- */
-/* Sidebar */
-/* -------------------------------------- */
+/* ==========================================================
+   ML ARENA - PRODUCTION UI
+   PART 2 : SIDEBAR + INPUTS + FEATURES + RESPONSIVE
+========================================================== */
+
+
+/* ==========================================================
+   SIDEBAR
+========================================================== */
 
 section[data-testid="stSidebar"]{
-
-    box-shadow:5px 0 18px rgba(0,0,0,.05);
+    background: #FFFFFF;
+    color: #1F2937;
+    border-right: 1px solid #E5E7EB;
+    box-shadow: 5px 0 18px rgba(0,0,0,.05);
 }
 
-/* -------------------------------------- */
-/* Tabs */
-/* -------------------------------------- */
+section[data-testid="stSidebar"] h1,
+section[data-testid="stSidebar"] h2,
+section[data-testid="stSidebar"] h3{
+
+    color:var(--heading);
+
+}
+/* Sidebar text */
+
+section[data-testid="stSidebar"] *{
+    color:#1F2937 !important;
+}
+section[data-testid="stSidebar"] a{
+    color:#1F2937 !important;
+    font-weight:600;
+}
+section[data-testid="stSidebar"] [data-testid="stSidebarNav"] a:hover{
+    background:#FFF6D8;
+    border-radius:10px;
+}
+
+
+/* ==========================================================
+   TABS
+========================================================== */
 
 .stTabs [role="tab"]{
 
     border-radius:12px;
 
     padding:10px 18px;
-    transition:.3s;
 
     font-weight:600;
+
+    transition:.3s;
+
+}
+
+.stTabs [role="tab"]:hover{
+
+    background:#FFF6D8;
+
 }
 
 .stTabs [aria-selected="true"]{
 
-    background:#D4A017 !important;
+    background:var(--primary)!important;
 
-    color:white !important;
+    color:white!important;
 
-    border-radius:12px;
 }
 
-/* -------------------------------------- */
-/* Text Input */
-/* -------------------------------------- */
+
+/* ==========================================================
+   INPUTS
+========================================================== */
 
 .stTextInput input,
-.stNumberInput input{
+.stNumberInput input,
+.stTextArea textarea{
 
-    border-radius:10px;
+    border-radius:12px;
 
-    border:1px solid #D4A017;
+    border:1px solid var(--border);
+
 }
 
-/* -------------------------------------- */
-/* Multiselect */
-/* -------------------------------------- */
+.stTextInput input:focus,
+.stNumberInput input:focus,
+.stTextArea textarea:focus{
+
+    border-color:var(--primary);
+
+}
+
+
+/* ==========================================================
+   SELECTBOX
+========================================================== */
+
+.stSelectbox{
+
+    border-radius:12px;
+
+}
 
 .stMultiSelect{
 
-    border-radius:10px;
+    border-radius:12px;
+
 }
 
-/* -------------------------------------- */
-/* Expander */
-/* -------------------------------------- */
+
+/* ==========================================================
+   EXPANDER
+========================================================== */
 
 .streamlit-expanderHeader{
 
     font-weight:600;
 
     color:var(--heading);
+
 }
 
-/* -------------------------------------- */
-/* Progress */
-/* -------------------------------------- */
 
-.stProgress > div > div{
+/* ==========================================================
+   PROGRESS BAR
+========================================================== */
 
-    background:#D4A017;
-}
-
-/* -------------------------------------- */
-/* Plotly */
-/* -------------------------------------- */
-
-.js-plotly-plot{
-
-    border-radius:18px;
-
-    overflow:hidden;
-}
-
-/* -------------------------------------- */
-/* Scrollbar */
-/* -------------------------------------- */
-
-::-webkit-scrollbar{
-
-    width:10px;
-}
-
-::-webkit-scrollbar-thumb{
+.stProgress>div>div{
 
     background:var(--primary);
 
+}
+
+
+/* ==========================================================
+   FEATURE CARD
+========================================================== */
+
+.feature-card{
+
+    background:var(--card);
+
+    border:1px solid var(--border);
+
     border-radius:20px;
-}
 
-::-webkit-scrollbar-track{
+    padding:28px;
 
-    background:#F3F4F6;
-}
+    text-align:center;
 
-:root{
+    min-height:220px;
 
-    --primary:#C89B3C;
-    --primary-dark:#B5831D;
+    margin-bottom:20px;
 
-    --background:#F8FAFC;
+    box-shadow:var(--shadow-sm);
 
-    --card:#FFFFFF;
-
-    --border:#E5E7EB;
-
-    --heading:#1F2937;
-
-    --text:#4B5563;
-
-    --success:#10B981;
-
-    --warning:#F59E0B;
-
-    --danger:#EF4444;
-
-    --radius:18px;
-
-    --shadow-sm:0 4px 12px rgba(15,23,42,.06);
-
-    --shadow-md:0 10px 24px rgba(15,23,42,.10);
-
-    --shadow-lg:0 18px 40px rgba(15,23,42,.15);
+    transition:.35s;
 
 }
 
-/* ==========================================
-   DESIGN TOKENS (Day 8 - Phase 2)
-========================================== */
+.feature-card:hover{
 
+    transform:translateY(-8px);
 
+    box-shadow:var(--shadow-lg);
 
-/* ==========================
-   Section Header
-========================== */
+}
 
-.section-title{
+.feature-card .icon{
 
-    font-size:30px;
+    font-size:42px;
 
-    font-weight:700;
+    margin-bottom:16px;
+
+}
+
+.feature-card h3{
 
     color:var(--heading);
 
-    margin-bottom:6px;
+    margin-bottom:12px;
+
 }
 
-.section-subtitle{
+.feature-card p{
 
     color:var(--text);
 
-    font-size:16px;
+    line-height:1.7;
 
-    margin-bottom:22px;
 }
-/* ==========================
-   Status Badge
-========================== */
+
+
+/* ==========================================================
+   INFO CARD
+========================================================== */
+
+.info-card{
+
+    background:#FFFFFF;
+
+    border-left:5px solid var(--primary);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    margin-bottom:18px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+/* ==========================================================
+   RECOMMENDATION
+========================================================== */
+
+.recommendation{
+
+    background:#F0FDF4;
+
+    border-left:5px solid var(--success);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+/* ==========================================================
+   WARNING
+========================================================== */
+
+.warning-card{
+
+    background:#FFFBEB;
+
+    border-left:5px solid var(--warning);
+
+    padding:18px;
+
+    border-radius:16px;
+
+    box-shadow:var(--shadow-sm);
+
+}
+
+
+/* ==========================================================
+   BADGE
+========================================================== */
 
 .badge{
 
@@ -419,119 +601,115 @@ section[data-testid="stSidebar"]{
     font-weight:600;
 
     border:1px solid rgba(200,155,60,.25);
+
 }
-/* ==========================
-   Feature Card
-========================== */
 
-.feature-card{
 
-    background:var(--card);
+/* ==========================================================
+   PLOTLY
+========================================================== */
 
-    padding:26px;
+.js-plotly-plot{
+
+    border-radius:18px;
+
+    overflow:hidden;
+
+}
+
+
+/* ==========================================================
+   SCROLLBAR
+========================================================== */
+
+::-webkit-scrollbar{
+
+    width:10px;
+
+}
+
+::-webkit-scrollbar-thumb{
+
+    background:var(--primary);
 
     border-radius:20px;
 
-    border:1px solid var(--border);
-
-    box-shadow:4px 0 14px rgba(15,23,42,.06);
-
-    text-align:center;
-
-    height:100%;
-
-    transition:.35s;
 }
 
-.feature-card:hover{
+::-webkit-scrollbar-track{
 
-    transform:translateY(-8px);
+    background:#F3F4F6;
 
-    box-shadow:var(--shadow-lg);
 }
 
-.feature-card .icon{
 
-    font-size:42px;
-
-    margin-bottom:15px;
-}
-
-.feature-card h3{
-
-    margin-bottom:10px;
-
-    color:var(--heading);
-}
-
-.feature-card p{
-
-    color:var(--text);
-
-    font-size:15px;
-
-    line-height:1.7;
-}
-
-/* ==========================
-   Info Card
-========================== */
-
-.info-card{
-
-    background:#FFFFFF;
-
-    border-left:5px solid var(--primary);
-
-    padding:18px;
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow-sm);
-
-    margin-bottom:18px;
-}
-/* ==========================
-   Recommendation Card
-========================== */
-
-.recommendation{
-
-    background:#F0FDF4;
-
-    border-left:5px solid var(--success);
-
-    padding:18px;
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow-sm);
-}
-/* ==========================
-   Warning Card
-========================== */
-
-.warning-card{
-
-    background:#FFFBEB;
-
-    border-left:5px solid var(--warning);
-
-    padding:18px;
-
-    border-radius:16px;
-
-    box-shadow:var(--shadow-sm);
-}
-/* ==========================
-   Smooth Hover
-========================== */
+/* ==========================================================
+   HOVER EFFECTS
+========================================================== */
 
 .card,
 .feature-card,
-.info-card{
+.info-card,
+.warning-card,
+.recommendation{
 
     transition:
         transform .35s ease,
         box-shadow .35s ease;
+
+}
+
+.card:hover,
+.feature-card:hover,
+.info-card:hover{
+
+    transform:translateY(-6px);
+
+}
+
+
+/* ==========================================================
+   RESPONSIVE
+========================================================== */
+
+@media (max-width:768px){
+
+    .hero{
+
+        padding:24px;
+
+    }
+
+    .hero h1{
+
+        font-size:30px;
+
+    }
+
+    .hero h3{
+
+        font-size:20px;
+
+    }
+
+    .hero p{
+
+        font-size:15px;
+
+    }
+
+    .feature-card{
+
+        min-height:auto;
+
+        padding:22px;
+
+    }
+
+    .section-title{
+
+        font-size:24px;
+
+    }
+
 }

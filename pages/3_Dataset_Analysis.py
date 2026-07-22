@@ -59,7 +59,7 @@ datatype_df = pd.DataFrame({
     "Data Type": df.dtypes.astype(str)
 })
 
-width="stretch"
+
 
 st.divider()
 
@@ -73,7 +73,7 @@ missing_df = pd.DataFrame({
     "Missing Values": df.isnull().sum().values
 })
 
-st.dataframe(missing_df, )
+st.dataframe(missing_df, width = "stretch")
 
 st.divider()
 
@@ -113,6 +113,7 @@ if len(numeric_df.columns) > 1:
     plt.colorbar(heatmap)
 
     st.pyplot(fig)
+    plt.close(fig)
 
 else:
     st.info("Not enough numerical columns.")
@@ -138,6 +139,7 @@ if len(numeric_df.columns):
     ax.set_title(selected)
 
     st.pyplot(fig)
+    plt.close(fig)
 
 st.divider()
 
@@ -160,3 +162,4 @@ if target is not None:
     ax.set_ylabel("Count")
 
     st.pyplot(fig)
+    plt.close(fig)

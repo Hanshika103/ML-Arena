@@ -7,6 +7,7 @@ from datetime import datetime
 from ui.theme import load_theme
 
 from utils.validators import validate_predictions
+from utils.logger import get_logger
 
 if not validate_predictions():
     st.stop()
@@ -16,6 +17,8 @@ if not validate_predictions():
 # ----------------------------
 
 load_theme()
+logger = get_logger()
+logger.info("Export page opened.")
 
 # ----------------------------
 # Session State Check
@@ -69,8 +72,10 @@ target_column = st.session_state["target_column"]
 
 st.title("⬇️ Export Center")
 
-st.success(
-    "Export your trained model, predictions, and evaluation reports."
+st.success("✅ Everything is ready for export!")
+
+st.caption(
+    "Download the trained model, predictions, evaluation metrics, and experiment summary."
 )
 
 st.divider()
@@ -129,7 +134,8 @@ summary = pd.DataFrame({
         "Features",
         "Target Column",
         "Predictions",
-        "Generated On"
+        "Generated On",
+        "Best Model",
     ],
     "Value": [
         model_name,
@@ -140,6 +146,8 @@ summary = pd.DataFrame({
         target_column,
         len(predictions),
         datetime.now().strftime("%d-%m-%Y %H:%M:%S")
+        ,
+        st.session_state.get("best_model", model_name),
     ]
 })
 
@@ -170,6 +178,7 @@ st.download_button(
     data=model_buffer,
     file_name=f"{model_name.lower().replace(' ', '_')}_model.pkl",
     mime="application/octet-stream",
+    width="stretch",
 )
 
 # ----------------------------
@@ -188,6 +197,7 @@ st.download_button(
     data=prediction_csv,
     file_name="predictions.csv",
     mime="text/csv",
+    width="stretch",
 )
 
 # ----------------------------
@@ -206,6 +216,7 @@ st.download_button(
     data=metrics_csv,
     file_name="metrics.csv",
     mime="text/csv",
+    width="stretch",
 )
 
 st.success("✅ All export files are ready for download!")
@@ -216,7 +227,7 @@ st.success("✅ All export files are ready for download!")
 
 st.subheader("📊 Export Summary")
 
-col1, col2, col3 = st.columns(3)
+col1, col2, col3, col4 = st.columns(4)
 
 with col1:
     st.metric("Files Ready", "3")
@@ -226,6 +237,11 @@ with col2:
 
 with col3:
     st.metric("Metrics", len(metrics))
+with col4:
+    st.metric(
+        "Generated",
+        datetime.now().strftime("%H:%M"),
+    )
 
 st.divider()
 
@@ -260,7 +276,14 @@ prediction_df = pd.DataFrame({
 })
 
 st.dataframe(
-    prediction_df.head(10),
+    prediction_df.head(20),
     width="stretch",
     hide_index=True,
+)
+st.divider()
+
+st.success("🎉 ML Arena workflow completed successfully!")
+
+st.info(
+    "You have successfully uploaded data, preprocessed it, trained a model, evaluated its performance, and exported the results."
 )
