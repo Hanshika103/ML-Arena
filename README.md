@@ -171,7 +171,7 @@ streamlit run app.py
 
 ## 📸 Screenshots
 
-> Add screenshots here after deployment.
+
 
 ### Dashboard
 
@@ -192,9 +192,8 @@ streamlit run app.py
 
 ### Results
 
-```
-screenshots/results.png
-```
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/100f2805-7691-4e53-b3c2-0bd95b46753b" />
+
 
 ---
 
