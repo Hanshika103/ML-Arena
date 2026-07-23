@@ -1,112 +1,157 @@
-# 🚀 ML Arena – Intelligent Machine Learning Benchmark Platform
+# 🚀 ML Arena - Intelligent Machine Learning Benchmark Platform
 
-<p align="center">
+> Train, compare, evaluate, and visualize Machine Learning models through a modern interactive web application.
 
-![Python](https://img.shields.io/badge/Python-3.11-blue?style=for-the-badge&logo=python)
-![Streamlit](https://img.shields.io/badge/Streamlit-Web%20App-red?style=for-the-badge&logo=streamlit)
-![Scikit Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange?style=for-the-badge&logo=scikitlearn)
-![Status](https://img.shields.io/badge/Status-Active-success?style=for-the-badge)
-
-</p>
+![Python](https://img.shields.io/badge/Python-3.11-blue)
+![Streamlit](https://img.shields.io/badge/Streamlit-App-red)
+![Scikit-Learn](https://img.shields.io/badge/Scikit--Learn-ML-orange)
+![License](https://img.shields.io/badge/License-MIT-green)
 
 ---
 
-# 📌 Overview
+## 📖 Overview
 
-ML Arena is a professional end-to-end Machine Learning benchmarking platform built with **Python**, **Streamlit**, and **Scikit-Learn**.
+ML Arena is a production-ready Machine Learning benchmarking platform built using **Python**, **Streamlit**, and **Scikit-Learn**. It enables users to upload datasets, preprocess data, train multiple ML models, compare their performance, visualize results, and export trained models—all from an intuitive web interface.
 
-The application enables users to upload datasets, preprocess data, train multiple machine learning models, compare their performance, visualize evaluation metrics, and export trained models—all through an intuitive web interface without writing code.
-
-The goal of this project is to simplify the complete machine learning workflow while providing an industry-level user experience.
+Designed as an end-to-end ML workflow, the project combines data preprocessing, model training, evaluation, visualization, and reporting into a single application.
 
 ---
 
-# ✨ Current Features
+## ✨ Features
 
-# ✨ Current Features
-
-## 📂 Dataset Management
-
-- Upload CSV datasets
-- Dataset Preview
-- Dataset Shape Information
-- Column Information
-- Data Type Detection
-- Missing Value Analysis
-- Session-Based Dataset Storage
-
----
-
-## 📊 Exploratory Data Analysis (EDA)
-
-- Dataset Overview
-- Statistical Summary
-- Missing Value Visualization
-- Duplicate Record Detection
-- Correlation Heatmap
-- Feature Distribution Analysis
-- Target Variable Visualization
-- Numerical & Categorical Feature Detection
+- 📂 Upload CSV datasets
+- 🔍 Automatic dataset analysis
+- 🧹 Missing value handling
+- 📊 Exploratory Data Analysis (EDA)
+- ⚙️ Data preprocessing
+- 🎯 Automatic problem type detection (Classification / Regression)
+- 🤖 Train multiple ML algorithms
+- 📈 Performance comparison
+- 📉 Interactive visualizations
+- 💾 Export trained models
+- 📑 Export evaluation reports
+- 🎨 Modern responsive UI
+- ⚡ Optimized for low-resource systems
 
 ---
 
-## ⚙️ Data Preprocessing
+## 🛠️ Tech Stack
 
-### Missing Value Handling
+### Frontend
+- Streamlit
+- HTML
+- CSS
 
-- Mean Imputation
-- Median Imputation
-- Most Frequent Imputation
-- Drop Missing Values
+### Backend
+- Python
 
-### Encoding
+### Machine Learning
+- Scikit-Learn
+- Pandas
+- NumPy
 
-- Label Encoding
-- One Hot Encoding
+### Visualization
+- Plotly
+- Matplotlib
 
-### Feature Scaling
-
-- Standard Scaler
-- Min-Max Scaler
-- Robust Scaler
-
-### Data Splitting
-
-- Adjustable Train-Test Split
-- Custom Random State
+### Utilities
+- Joblib
+- OpenPyXL
 
 ---
 
-## 🧠 Machine Learning
+## 🧠 Supported Algorithms
 
 ### Classification
-
 - Logistic Regression
-- Decision Tree
-- Random Forest
+- Decision Tree Classifier
+- Random Forest Classifier
 - K-Nearest Neighbors
 - Support Vector Machine
 
 ### Regression
-
 - Linear Regression
 - Decision Tree Regressor
 - Random Forest Regressor
 
 ---
 
-## 📈 Model Evaluation
+## 🔄 ML Workflow
 
-### Classification Metrics
+Upload Dataset
+
+↓
+
+Dataset Analysis
+
+↓
+
+Preprocessing
+
+↓
+
+Model Training
+
+↓
+
+Performance Evaluation
+
+↓
+
+Visualization
+
+↓
+
+Export Results
+
+---
+
+## 📁 Project Structure
+
+```text
+ML-Arena/
+│
+├── app.py
+├── pages/
+├── utils/
+├── assets/
+├── logs/
+├── exports/
+├── models/
+├── README.md
+├── requirements.txt
+└── LICENSE
+```
+
+---
+
+## 🚀 Installation
+
+```bash
+git clone https://github.com/YOUR_USERNAME/ML-Arena.git
+
+cd ML-Arena
+
+pip install -r requirements.txt
+
+streamlit run app.py
+```
+
+---
+
+## 📊 Performance Metrics
+
+### Classification
 
 - Accuracy
 - Precision
 - Recall
 - F1 Score
 - Confusion Matrix
-- Classification Report
+- ROC Curve
+- Precision-Recall Curve
 
-### Regression Metrics
+### Regression
 
 - MAE
 - MSE
@@ -115,223 +160,73 @@ The goal of this project is to simplify the complete machine learning workflow w
 
 ---
 
-## 🏆 Model Comparison
+## 📸 Screenshots
 
-- Compare Multiple Models
-- Automatic Best Model Selection
-- Download Comparison Report
+> Add screenshots here after deployment.
 
----
-
-## 📦 Export Center
-
-- Download Trained Model (.pkl)
-- Download Predictions (.csv)
-- Download Metrics (.csv)
-- Experiment Summary
-- Model Information Dashboard
-- Prediction Preview
-- Metrics Preview
-- Export Summary Dashboard
-
----
-
-## 🎨 User Interface
-
-- Modern Dashboard
-- Responsive Layout
-- Professional Navigation
-- Custom CSS Theme
-- Interactive Metric Cards
-- Download Center
-- Clean Workflow
-
-# 🛠 Technology Stack
-
-| Category | Technologies |
-|----------|--------------|
-| Language | Python |
-| Frontend | Streamlit |
-| Machine Learning | Scikit-Learn |
-| Data Processing | Pandas, NumPy |
-| Visualization | Matplotlib, Plotly, Seaborn |
-| Model Storage | Joblib |
-| Dataset Support | CSV |
-| Styling | Custom CSS |
-
----
-
-# 📁 Project Structure
+### Dashboard
 
 ```
-ML_Arena/
-│
-├── assets/
-│   └── css/
-│
-├── pages/
-│   ├── Dashboard
-│   ├── Upload Dataset
-│   ├── Dataset Analysis
-│   ├── Preprocessing
-│   ├── Model Training
-│   ├── Results
-│   └── Export
-│
-├── ui/
-│
-├── utils/
-│
-├── models/
-│
-├── app.py
-├── requirements.txt
-└── README.md
+screenshots/dashboard.png
+```
+
+### Dataset Upload
+
+```
+screenshots/upload.png
+```
+
+### Model Training
+
+```
+screenshots/training.png
+```
+
+### Results
+
+```
+screenshots/results.png
 ```
 
 ---
 
-# ⚡ Workflow
-
-Dataset Upload
-
-⬇
-
-Dataset Analysis
-
-⬇
-
-Data Preprocessing
-
-⬇
-
-Train-Test Split
-
-⬇
-
-Model Selection
-
-⬇
-
-Model Training
-
-⬇
-
-Performance Evaluation
-
-⬇
-
-Model Comparison
-
-⬇
-
-Export Model & Reports
-
----
-
-# 📦 Installation
-
-Clone the repository
-
-```bash
-git clone https://github.com/yourusername/ml-arena.git
-```
-
-Navigate to project
-
-```bash
-cd ml-arena
-```
-
-Install dependencies
-
-```bash
-pip install -r requirements.txt
-```
-
-Run Streamlit
-
-```bash
-streamlit run app.py
-```
-
----
-
-# 🎯 Supported Machine Learning Tasks
-
-✔ Classification
-
-✔ Regression
-
----
-
-# 📸 Screenshots
-
-The following screenshots will be added:
-
-- Dashboard
-- Dataset Upload
-- Dataset Analysis
-- Data Preprocessing
-- Model Training
-- Results Page
-- Export Page
-
----
-
-# 🚧 Upcoming Features
+## 🔮 Future Improvements
 
 - Hyperparameter Tuning
 - Cross Validation
-- Feature Importance
-- ROC Curve
-- Precision-Recall Curve
-- Learning Curve
-- SHAP Explainability
-- AutoML Integration
-- Experiment History
-- PDF Report Generation
-- Dark / Light Theme
+- AutoML Support
+- Deep Learning Integration
+- Explainable AI (SHAP/LIME)
 - Cloud Deployment
-
-# 🎓 Learning Outcomes
-
-This project demonstrates practical implementation of:
-
-- End-to-End Machine Learning Pipeline
-- Data Visualization
-- Data Preprocessing
-- Model Benchmarking
-- Model Comparison
-- Model Serialization
-- Machine Learning Evaluation
-- Streamlit Application Development
-- Software Architecture
-- Session State Management
-- Professional UI Design
----
-
-# 🤝 Contributing
-
-Contributions, feature suggestions, and improvements are welcome.
-
-Feel free to fork the repository and submit a pull request.
+- Experiment Tracking
 
 ---
 
-# 📜 License
+## 🤝 Contributing
+
+Contributions are welcome!
+
+1. Fork the repository
+2. Create a feature branch
+3. Commit your changes
+4. Push the branch
+5. Open a Pull Request
+
+---
+
+## 📄 License
 
 This project is licensed under the MIT License.
 
 ---
 
-# 👩‍💻 Author
+## 👩‍💻 Author
 
 **Hanshika Mukati**
 
-Computer Science Engineering Student
+B.Tech Computer Science & Engineering
 
-Machine Learning | Python | Data Science | AI Enthusiast
+Machine Learning | Data Science | AI
 
 ---
 
