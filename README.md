@@ -187,9 +187,8 @@ streamlit run app.py
 
 ### Model Training
 
-```
-screenshots/training.png
-```
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/9159f32b-a2c8-4caf-89fa-32db2711b9da" />
+
 
 ### Results
 
