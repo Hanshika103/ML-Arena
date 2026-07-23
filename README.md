@@ -16,6 +16,9 @@ ML Arena is a production-ready Machine Learning benchmarking platform built usin
 Designed as an end-to-end ML workflow, the project combines data preprocessing, model training, evaluation, visualization, and reporting into a single application.
 
 ---
+# 🚀 ML Arena - Intelligent Machine Learning Benchmark Platform
+
+🌐 **Live Demo:** https://ml-arena-rcbqrgysmeyqtcfzzxtdob.streamlit.app/
 
 ## ✨ Features
 
