@@ -175,9 +175,10 @@ streamlit run app.py
 
 ### Dashboard
 
-```
-screenshots/dashboard.png
-```
+
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/2c0a3e38-c216-481e-8eec-973b2bb649f8" />
+
+
 
 ### Dataset Upload
 
