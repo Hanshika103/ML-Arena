@@ -182,9 +182,8 @@ streamlit run app.py
 
 ### Dataset Upload
 
-```
-screenshots/upload.png
-```
+<img width="1366" height="768" alt="image" src="https://github.com/user-attachments/assets/7a61062e-3338-4150-b356-fc64bfadcac8" />
+
 
 ### Model Training
 
